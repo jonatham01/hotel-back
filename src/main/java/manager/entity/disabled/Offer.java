@@ -1,9 +1,11 @@
-package manager.entity;
+package manager.entity.disabled;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import manager.entity.Hotel;
+import manager.entity.RoomCategory;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;

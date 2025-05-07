@@ -1,4 +1,4 @@
-package manager.entity;
+package manager.entity.disabled;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;

@@ -1,9 +1,10 @@
-package manager.entity;
+package manager.entity.disabled;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import manager.entity.Fee;
 
 import java.math.BigInteger;
 

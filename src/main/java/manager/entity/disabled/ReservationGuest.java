@@ -1,10 +1,13 @@
-package manager.entity;
+package manager.entity.disabled;
 
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import manager.entity.Guest;
+import manager.entity.Reservation;
+import manager.entity.ReservationGuestPK;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
