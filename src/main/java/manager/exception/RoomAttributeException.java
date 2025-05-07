@@ -11,7 +11,7 @@ public class RoomAttributeException {
 
         if(Strings.isNotEmpty(room.getRoomAttributeDescription()))throw  new ApiUnProcessableEntity("Room attribute description cannot be empty");
 
-        if(Strings.isNotEmpty(room.getRoomAttributePhotoUrl()))throw  new ApiUnProcessableEntity("Room attribute photo url cannot be empty");
+        //if(Strings.isNotEmpty(room.getRoomAttributePhotoUrl()))throw  new ApiUnProcessableEntity("Room attribute photo url cannot be empty");
     }
     public static void dontExist() throws ApiUnProcessableEntity{
         throw new ApiUnProcessableEntity("Room attribute does not exist in Database");

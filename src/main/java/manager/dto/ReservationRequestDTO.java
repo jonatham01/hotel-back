@@ -4,6 +4,7 @@ import lombok.Builder;
 import lombok.Data;
 
 import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.time.LocalDate;
 
 @Data
@@ -15,5 +16,5 @@ public class ReservationRequestDTO {
     private Integer reservationHotelId;
     private Integer reservationRoomCategoryId;
 
-    private Integer reservationClientId;
+    private BigInteger reservationClientId;
 }

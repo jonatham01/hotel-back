@@ -20,5 +20,5 @@ public class ReservationResponseDTO {
     private Integer reservationHotelId;
     private Integer reservationRoomId;
     private UUID reservationPaymentId;
-    private Integer reservationClientId;
+    private BigInteger reservationClientId;
 }

@@ -56,7 +56,7 @@ public class Reservation {
     private UUID reservationPaymentId;
 
     @Column(name = "")
-    private Integer reservationClientId;
+    private BigInteger reservationClientId;
 
     @ManyToOne
     @JoinColumn(name = "reservation_paymentId")
