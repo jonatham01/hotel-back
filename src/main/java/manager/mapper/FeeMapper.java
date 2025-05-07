@@ -16,7 +16,7 @@ public class FeeMapper {
         fee.setRoomCategoryId(dto.getRoomCategoryId());
         return fee;
     }
-    public FeeResponseDTO toDto(Fee entity){
+    public static FeeResponseDTO toDto(Fee entity){
         return  FeeResponseDTO.builder()
                 .publicFee(entity.getPublicFee())
                 .date(entity.getDate())
