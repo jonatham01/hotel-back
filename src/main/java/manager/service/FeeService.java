@@ -4,8 +4,10 @@ import lombok.RequiredArgsConstructor;
 import manager.dto.FeeRequestDTO;
 import manager.dto.FeeResponseDTO;
 import manager.entity.Fee;
+import manager.entity.RoomCategory;
 import manager.mapper.FeeMapper;
 import manager.repository.FeeRepository;
+import manager.repository.RoomCategoryRepository;
 import org.springframework.stereotype.Service;
 
 import java.math.BigInteger;
@@ -16,6 +18,7 @@ import java.util.List;
 public class FeeService {
     private final FeeRepository feeRepository;
     private final FeeMapper feeMapper;
+    private final RoomCategoryRepository roomCategoryRepository;
 
     public FeeResponseDTO save(FeeRequestDTO feeRequestDTO) {
         try{
@@ -58,11 +61,12 @@ public class FeeService {
 
     public FeeResponseDTO update(FeeRequestDTO dto, BigInteger id) {
       try {
+          RoomCategory roomCategory= roomCategoryRepository.findById(dto.getRoomCategoryId()).orElseThrow(() -> new RuntimeException("Room category not found"));
           Fee fee = feeRepository.findById(id).get();
           fee.setPublicFee(dto.getPublicFee());
           fee.setDate(dto.getDate());
           fee.setIncrementRate(dto.getIncrementRate());
-          fee.setRoomCategoryId(dto.getRoomCategoryId());
+          fee.setRoomCategory(roomCategory);
           feeRepository.save(fee);
           return feeMapper.toDto(fee);
       }catch (Exception e){

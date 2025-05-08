@@ -5,9 +5,6 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import manager.entity.Guest;
-import manager.entity.Reservation;
-import manager.entity.ReservationGuestPK;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -52,13 +49,13 @@ public class ReservationGuest {
     @Column(name="reservation_guest_updated_at")
     private LocalDateTime updatedAt;
 
-    @ManyToOne
-    @JoinColumn(name="reservation_guest_reservation_id")
-    private Reservation reservation;
-
-    @ManyToOne
-    @JoinColumn(name = "reservation_guest_guest_id")
-    private Guest guest;
+//    @ManyToOne
+//    @JoinColumn(name="reservation_guest_reservation_id")
+//    private Reservation reservation;
+//
+//    @ManyToOne
+//    @JoinColumn(name = "reservation_guest_guest_id")
+//    private Guest guest;
 
 
 }

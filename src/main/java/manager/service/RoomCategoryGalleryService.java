@@ -1,5 +1,6 @@
 package manager.service;
 
+import lombok.RequiredArgsConstructor;
 import manager.entity.RoomCategory;
 import manager.entity.RoomCategoryGallery;
 import manager.repository.RoomCategoryGalleryRepository;
@@ -19,6 +20,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Service
+@RequiredArgsConstructor
 public class RoomCategoryGalleryService {
 
     @Value("${gallery.upload.path:src/main/resources/static/uploads}")
@@ -27,11 +29,7 @@ public class RoomCategoryGalleryService {
     private final RoomCategoryGalleryRepository repository;
     private final RoomCategoryRepository categoryRepository;
 
-    @Autowired
-    public RoomCategoryGalleryService(RoomCategoryGalleryRepository repository, RoomCategoryRepository categoryRepository) {
-        this.repository = repository;
-        this.categoryRepository = categoryRepository;
-    }
+
 
     public RoomCategoryGallery save(String tittle, String description, MultipartFile file, Integer categoryId) throws IOException {
         if (repository.existsByTittle(tittle)) {

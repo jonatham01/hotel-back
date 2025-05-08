@@ -15,10 +15,12 @@ public class RoomCategoryDisponibilityRoom {
     private RoomCategoryDisponibilityRoomPK id;
 
     @ManyToOne
-    @JoinColumn(name = "room_id")
+    @MapsId("roomId") // <- enlaza con el campo roomId del embeddable
+    @JoinColumn(name = "room_id", referencedColumnName = "room_id")
     private Room room;
 
     @ManyToOne
-    @JoinColumn(name = "disponibility_id")
+    @MapsId("roomCategoryDisponibilityId") // <- enlaza con el campo roomCategoryDisponibilityId
+    @JoinColumn(name = "disponibility_id", referencedColumnName = "room_category_disponibility_id")
     private RoomCategoryDisponibility disponibility;
 }

@@ -34,15 +34,13 @@ public class RoomOccupancy {
     @Column(name="room_occupancy_change_datetime")
     private LocalDateTime roomOccupancyUltimatedChange;
 
-    @Column(name="occupancy_reservation_id", nullable = true)
-    private BigInteger roomOccupancyReservationId;
 
    // @Column(name = "room_availability_room_id")
    // private Integer roomId;
 
-    @ManyToOne()
-    @JoinColumn(name="occupancy_room")
-    private Room room;
+//    @ManyToOne()
+//    @JoinColumn(name="occupancy_room")
+//    private Room room;
 
     @ManyToOne()
     @JoinColumn(name="occupancy_reservation_id")

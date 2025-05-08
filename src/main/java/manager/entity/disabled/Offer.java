@@ -40,10 +40,7 @@ public class Offer {
     @Column(name = "offer_end_availability")
     private LocalDate offerEndDateAvailability;
 
-    @Column(name = "offer_category_id")
-    private String roomCategoryId;
-    @Column(name = "offer_hotel_id")
-    private Integer offerHotelId;
+
 
     @ManyToOne()
     @JoinColumn(name = "offer_category_id")

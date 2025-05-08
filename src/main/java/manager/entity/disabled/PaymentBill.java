@@ -22,8 +22,7 @@ public class PaymentBill {
     private String billPhotoUrl;
     @Column(name = "bill_tech_supplier")
     private String billTechSupplier;
-    @Column(name = "bill_payment_id")
-    private String billPaymentId;
+
 
     @ManyToOne
     @JoinColumn(name="bill_payment_id")
