@@ -33,10 +33,8 @@ public class RoomCategory {
     @Column(name= "room_category_gallery")
     private BigInteger roomCategoryGallery;
 
-    @Column(name = "room_category_hotel_id",nullable = false)
-    private Integer roomCategoryHotelId;
-
-
+    //@Column(name = "room_category_hotel_id",nullable = false)
+    //private Integer roomCategoryHotelId;
 
     @ManyToOne()
     @JoinColumn(name = "room_category_hotel_id")

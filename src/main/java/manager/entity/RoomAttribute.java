@@ -26,9 +26,6 @@ public class RoomAttribute{
     @Column(unique = true, nullable = false,name = "room_attribute_photo")
     private String roomAttributePhotoUrl;
 
-    @Column(name = "room_attribute_category_id")
-    private Integer roomCategoryId;
-
     @ManyToOne
     @JoinColumn(name = "room_attribute_category_id")
     private RoomCategory roomCategory;

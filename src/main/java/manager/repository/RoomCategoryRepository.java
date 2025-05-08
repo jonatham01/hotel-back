@@ -14,7 +14,7 @@ public interface RoomCategoryRepository  extends JpaRepository<RoomCategory, Int
     List<RoomCategory> findByRoomCategoryHotelId(Integer id);
     Optional<RoomCategory> findByRoomCategoryName(String roomCategoryName);
 
-    @Query("SELECT r FROM RoomCategory r WHERE (r.roomCategoryPrice BETWEEN :minPrice AND :maxPrice AND r.roomCategoryHotelId = :hotelId) OR (:roomCategoryName IS NOT NULL AND r.roomCategoryName = :roomCategoryName) AND r.roomCategoryHotelId = :hotelId")
+    @Query("SELECT r FROM RoomCategory r WHERE (r.roomCategoryPrice BETWEEN :minPrice AND :maxPrice AND r.hotel.hotelId = :hotelId) OR (:roomCategoryName IS NOT NULL AND r.roomCategoryName = :roomCategoryName) AND r.hotel.hotelId = :hotelId")
     List<RoomCategory> findRoomCategories(
             @Param("minPrice") double minPrice,
             @Param("maxPrice") double maxPrice,

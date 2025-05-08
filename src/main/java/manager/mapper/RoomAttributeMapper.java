@@ -11,7 +11,6 @@ public class RoomAttributeMapper {
         RoomAttribute entity = new RoomAttribute();
         entity.setRoomAttributeName(dto.getRoomAttributeName());
         entity.setRoomAttributeDescription(dto.getRoomAttributeDescription());
-        entity.setRoomCategoryId(dto.getRoomCategoryId());
         entity.setRoomAttributePhotoUrl(imageUrl);
         return entity;
     }
@@ -21,7 +20,7 @@ public class RoomAttributeMapper {
         dto.setRoomAttributeName(entity.getRoomAttributeName());
         dto.setRoomAttributeDescription(entity.getRoomAttributeDescription());
         dto.setRoomAttributePhotoUrl(entity.getRoomAttributePhotoUrl());
-        dto.setRoomCategoryId(entity.getRoomCategoryId());
+        dto.setRoomCategoryId(entity.getRoomCategory().getRoomCategoryId());
         return dto;
     }
 }

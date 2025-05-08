@@ -14,9 +14,6 @@ public class HotelPhone {
     @Id
     private String number;
 
-    @Column(name = "phone_hotel_id",nullable = false)
-    private Integer HotelId;
-
     @ManyToOne()
     @JoinColumn(name="phone_hotel_id")
     private Hotel hotel;

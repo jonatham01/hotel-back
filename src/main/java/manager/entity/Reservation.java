@@ -46,20 +46,9 @@ public class Reservation {
 //    @Column(name = "reservation_total_guest_cost")
 //    private BigDecimal reservationTotalGuestCost;
 
-    @Column(name="reservation_hotel_id")
-    private Integer reservationHotelId;
-
-    @Column(name = "reservation_room_id")
-    private Integer reservationRoomId;
-
-    @Column(name="reservation_paymentId")
-    private UUID reservationPaymentId;
-
-    @Column(name = "")
-    private BigInteger reservationClientId;
 
     @ManyToOne
-    @JoinColumn(name = "reservation_paymentId")
+    @JoinColumn(name = "reservation_paymentId",nullable = true)
     private Payment reservationPayment;
 
     @ManyToOne

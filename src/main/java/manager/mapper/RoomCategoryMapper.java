@@ -17,7 +17,6 @@ public class RoomCategoryMapper {
         newEntity.setRoomCategoryName(roomCategory.getRoomCategoryName());
         newEntity.setRoomCategoryPrice(roomCategory.getRoomCategoryPrice());
         newEntity.setRoomCategoryGallery(roomCategory.getRoomCategoryGallery());
-        newEntity.setRoomCategoryHotelId(roomCategory.getRoomCategoryHotelId());
         return newEntity;
     }
 

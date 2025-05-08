@@ -27,6 +27,8 @@ public class ReservationService {
     private final RoomCategoryDisponibilityRoomRepository roomCategoryDisponibilityRoomRepository;
     private final RoomCategoryRepository roomCategoryRepository;
     private final PaymentRepository paymentRepository;
+    private final HotelRepository hotelRepository;
+    private final ClientRepository clientRepository;
 
     public static List<LocalDate> getDatesBetween(LocalDate start, LocalDate end) {
         List<LocalDate> dates = new ArrayList<>();
@@ -54,7 +56,7 @@ public class ReservationService {
                         dto.getReservationRoomCategoryId(),
                         localDate
                 );
-                if(disponibility.isPresent()) {
+                if(disponibility.isPresent() ) {
                     dontAvailableRooms.addAll(disponibility.get().getDontAvailableRooms());
                 }
             });
@@ -103,8 +105,13 @@ public class ReservationService {
             });
 
             //reservation creation
+            Hotel hotel = hotelRepository.findById(dto.getReservationHotelId()).orElseThrow(()->new RuntimeException("Hotel not found"));
+            Client client = clientRepository.findById(dto.getReservationClientId()).orElseThrow(()->new RuntimeException("Client not found"));
             Reservation reservation = reservationMapper.toEntity(dto);
-            reservation.setReservationRoomId(allRooms.getFirst().getRoomId());
+            reservation.setReservationRoom(allRooms.getFirst());
+            reservation.setReservationHotel(hotel);
+            reservation.setReservationClient(client);
+            reservation.setReservationPayment(null);
             Reservation savedReservation = reservationRepository.save(reservation);
             //payment creation
             Payment payment = new Payment();
@@ -113,7 +120,7 @@ public class ReservationService {
             payment.setPaymentDate(LocalDateTime.now());
             Payment savedPayment = paymentRepository.save(payment);
             //update paymentId
-            reservation.setReservationPaymentId(savedPayment.getId());
+            reservation.setReservationPayment(savedPayment);
             Reservation updatedReservation= reservationRepository.save(reservation);
             //return
             return reservationMapper.toDTO(updatedReservation);

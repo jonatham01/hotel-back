@@ -20,9 +20,10 @@ import java.util.UUID;
 public class PaymentTransactionService {
     private final PaymentTransactionRepository paymentTransactionRepository;
     private final PaymentRepository paymentRepository;
+    private final PaymentTransactionMapper paymentTransactionMapper;
 
     public PaymentTransactionResponseDTO save(PaymentTransactionRequestDTO dto) {
-        PaymentTransaction paymentTransaction = PaymentTransactionMapper.mapToEntity(dto);
+        PaymentTransaction paymentTransaction = paymentTransactionMapper.mapToEntity(dto);
         try{
             paymentTransaction = paymentTransactionRepository.save(paymentTransaction);
         }catch (Exception e){
@@ -50,7 +51,7 @@ public class PaymentTransactionService {
         return responseDTOs;
     }
     public PaymentTransactionResponseDTO update(int id, PaymentTransactionRequestDTO dto) {
-        PaymentTransaction paymentTransaction = PaymentTransactionMapper.mapToEntity(dto);
+        PaymentTransaction paymentTransaction = paymentTransactionMapper.mapToEntity(dto);
         paymentTransaction.setPaymentCashId(id);
         paymentTransaction = paymentTransactionRepository.save(paymentTransaction);
         PaymentTransactionResponseDTO responseDTO = PaymentTransactionMapper.mapToDTO(paymentTransaction);

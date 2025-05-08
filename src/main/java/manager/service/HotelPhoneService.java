@@ -1,8 +1,11 @@
 package manager.service;
 import lombok.RequiredArgsConstructor;
+import manager.dto.HotelPhoneRequest;
+import manager.entity.Hotel;
 import manager.entity.HotelPhone;
 import manager.exception.HotelPhoneException;
 import manager.repository.HotelPhoneRepository;
+import manager.repository.HotelRepository;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
@@ -12,10 +15,14 @@ import java.util.List;
 @RequiredArgsConstructor
 public class HotelPhoneService {
     private final HotelPhoneRepository hotelPhoneRepository;
+    private final HotelRepository hotelRepository;
 
-    public HotelPhone createHotelPhone(HotelPhone hotelPhone) {
-        HotelPhoneException.validate(hotelPhone);
+    public HotelPhone createHotelPhone(HotelPhoneRequest dto) {
         try {
+            Hotel hotel = hotelRepository.findById(dto.getHotelId()).orElse(null);
+            HotelPhone hotelPhone = new HotelPhone();
+            hotelPhone.setHotel(hotel);
+            HotelPhoneException.validate(hotelPhone);
             return hotelPhoneRepository.save(hotelPhone);
         } catch (Exception e) {
             throw new RuntimeException("Unexpected error while saving hotel phone", e);

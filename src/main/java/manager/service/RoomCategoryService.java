@@ -3,10 +3,12 @@ package manager.service;
 import lombok.RequiredArgsConstructor;
 import manager.dto.RoomCategoryRequest;
 import manager.dto.RoomCategoryResponse;
+import manager.entity.Hotel;
 import manager.entity.RoomCategory;
 import manager.entity.RoomCategoryDisponibility;
 import manager.exception.RoomCategoryException;
 import manager.mapper.RoomCategoryMapper;
+import manager.repository.HotelRepository;
 import manager.repository.RoomCategoryDisponibilityRepository;
 import manager.repository.RoomCategoryRepository;
 import org.springframework.stereotype.Service;
@@ -20,9 +22,14 @@ import java.util.Optional;
 public class RoomCategoryService {
     private final RoomCategoryRepository repository ;
     private final RoomCategoryDisponibilityRepository disponibilityRepository ;
+    private final HotelRepository hotelRepository;
 
     public RoomCategoryResponse createRoomCategory(RoomCategoryRequest roomCategoryRequest) {
         RoomCategory roomCategory = RoomCategoryMapper.dtoToEntity(roomCategoryRequest);
+        Hotel hotel =hotelRepository.findById(roomCategoryRequest.getRoomCategoryHotelId()).orElseThrow(
+                ()->new RuntimeException("System could find hotel")
+        );
+        roomCategory.setHotel(hotel);
         RoomCategoryException.validate(roomCategory);
         try {
             RoomCategory savedRoomCategory = repository.save(roomCategory);
@@ -60,15 +67,14 @@ public class RoomCategoryService {
                 ).toList();
     }
     public List<RoomCategoryResponse> findByParameters(String name, double min, double max, Integer hotelId){
+        List<RoomCategory> roomCategory;
         if(name==null && Double.isNaN(min) && Double.isNaN(max)){
-            List<RoomCategory> roomCategory = repository.findByRoomCategoryHotelId(hotelId);
-            if(roomCategory.isEmpty())RoomCategoryException.exception("System could not find any Room category");
-            return roomCategory.stream().map(RoomCategoryMapper::entityToDto).toList();
+            roomCategory = repository.findByRoomCategoryHotelId(hotelId);
         }else{
-            List<RoomCategory> roomCategory = repository.findRoomCategories(min,max,hotelId,name);
-            if(roomCategory.isEmpty())RoomCategoryException.exception("System could not find any Room category");
-            return roomCategory.stream().map(RoomCategoryMapper::entityToDto).toList();
+            roomCategory = repository.findRoomCategories(min, max, hotelId, name);
         }
+        if(roomCategory.isEmpty())RoomCategoryException.exception("System could not find any Room category");
+        return roomCategory.stream().map(RoomCategoryMapper::entityToDto).toList();
     }
     public RoomCategoryResponse update(RoomCategory roomCategory) {
        if (!repository.existsById(roomCategory.getRoomCategoryId())) RoomCategoryException.dontExist();

@@ -1,5 +1,6 @@
 package manager.controller;
 
+import manager.dto.HotelPhoneRequest;
 import manager.dto.HotelPhoneResponse;
 import manager.entity.HotelPhone;
 import manager.mapper.HotelPhoneMapper;
@@ -30,7 +31,7 @@ public class HotelPhoneController {
         return ResponseEntity.ok(HotelPhoneMapper.toHotelPhoneResponse(hotelPhone));
     }
     @PostMapping
-    public ResponseEntity<HotelPhoneResponse> createHotelPhone(@RequestBody HotelPhone hotelPhone) {
+    public ResponseEntity<HotelPhoneResponse> createHotelPhone(@RequestBody HotelPhoneRequest hotelPhone) {
         HotelPhone number = hotelPhoneService.createHotelPhone(hotelPhone);
         return ResponseEntity.ok(HotelPhoneMapper.toHotelPhoneResponse(number));
     }

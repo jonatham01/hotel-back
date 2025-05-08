@@ -71,6 +71,7 @@ public class RoomAttributeService {
                 .orElseThrow(() -> new IllegalArgumentException("Room category not found"));
 
         RoomAttribute entity = RoomAttributeMapper.dtoToEntity(dto, "/uploads/" + filename);
+        entity.setRoomCategory(category);
         RoomAttribute saved =roomAttributeRepository.save(entity);
         return RoomAttributeMapper.toDTO(saved);
     }
@@ -99,7 +100,6 @@ public class RoomAttributeService {
         // Actualizar datos
         existing.setRoomAttributeName(dto.getRoomAttributeName());
         existing.setRoomAttributeDescription(dto.getRoomAttributeDescription());
-        existing.setRoomCategoryId(dto.getRoomCategoryId());
         existing.setRoomAttributePhotoUrl("/uploads/" + filename);
 
         // Actualizar relación con RoomCategory

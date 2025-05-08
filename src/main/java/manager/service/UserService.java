@@ -32,7 +32,7 @@ public class UserService {
         newUser.setRole(Role.ADMINISTRATOR);
         return userRepository.save(newUser);
     }
-    public User getUserById(int id) {
+    public User getUserById(Long id) {
         return userRepository.findById(id).orElse(null);
     }
     public Optional<User> findOneByUserName(String username) {

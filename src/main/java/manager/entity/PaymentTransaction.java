@@ -32,9 +32,6 @@ public class PaymentTransaction {
     @Column(name = "payment_transaction_datetime")
     private LocalDateTime paymentCashDateTime;
 
-    @Column(name = "payment_transaction_payment_id")
-    private UUID paymentCashPaymentId;
-
     @ManyToOne()
     @JoinColumn(name = "payment_transaction_payment_id")
     private Payment payment;

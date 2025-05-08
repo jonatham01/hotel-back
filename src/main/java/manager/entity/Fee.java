@@ -30,9 +30,6 @@ public class Fee {
     @Column(name = "fee_increment_rate")
     private Short incrementRate;
 
-    @Column(name = "fee_category_id")
-    private Integer roomCategoryId;
-
     @ManyToOne()
     @JoinColumn(name = "fee_category_id")
     private RoomCategory roomCategory;

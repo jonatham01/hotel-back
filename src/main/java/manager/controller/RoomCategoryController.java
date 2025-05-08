@@ -27,6 +27,7 @@ public class RoomCategoryController {
     }
     @GetMapping("filter")
     public ResponseEntity<List<RoomCategoryResponse>> findByFilter(@RequestParam String name, @RequestParam double min, @RequestParam double max, @RequestParam Integer hotelId ){
+        //modificar
             return ResponseEntity.ok().body(roomCategoryService.findByParameters(name, min, max, hotelId));
     }
     @GetMapping("available")

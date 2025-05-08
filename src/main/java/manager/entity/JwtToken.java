@@ -24,7 +24,4 @@ public class JwtToken {
     private boolean isValid;
     private Long userId;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
 }
