@@ -14,7 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("authentication")
+@RequestMapping("auth")
 @RequiredArgsConstructor
 public class AuthController {
     private final AuthService authService;
@@ -42,6 +42,13 @@ public class AuthController {
         User user= authService.findLoggedInUser();
         return  ResponseEntity.ok(user);
     }
+    @PreAuthorize("permitAll()")
+    @GetMapping("validate-token")
+    public ResponseEntity<Boolean> validate(@RequestParam String token) {
+        boolean isTokenValid = authService.validate(token);
+        return ResponseEntity.ok(isTokenValid);
+    }
+
 
 
 }

@@ -1,5 +1,6 @@
 package manager.controller;
 
+import lombok.RequiredArgsConstructor;
 import manager.dto.RoomAttributeDto;
 import manager.dto.RoomAttributeResponseDTO;
 import manager.entity.RoomAttribute;
@@ -14,11 +15,11 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.util.List;
 
-@Controller
-
+@RestController
+@RequestMapping("room-attribute")
+@RequiredArgsConstructor
 public class RoomAttributeController {
-    @Autowired
-    private  RoomAttributeService service ;
+    private  final RoomAttributeService service ;
 
     @GetMapping
     public ResponseEntity<List<RoomAttributeResponseDTO>> getRoomAttribute() {

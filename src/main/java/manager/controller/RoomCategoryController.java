@@ -13,7 +13,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Controller
-@RequestMapping("roomcategories")
+@RequestMapping("room-categories")
 @RequiredArgsConstructor
 public class RoomCategoryController {
     private final RoomCategoryService roomCategoryService;

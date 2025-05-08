@@ -39,16 +39,12 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             return;
         }
         Optional<JwtToken> jwtUserToken = jwtRepository.findByToken(token);
-
         boolean isValid = validateToken(jwtUserToken);
         if (!isValid) {
             filterChain.doFilter(request, response);
             return;
         }
-
-
         String username= jwtService.extractUsername(token);
-
         User userDetails = userService.findOneByUserName(username)
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
