@@ -5,7 +5,6 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
-import manager.core.User;
 import manager.entity.User;
 import manager.repository.JwtTokenRepository;
 import org.springframework.stereotype.Service;
