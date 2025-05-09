@@ -30,7 +30,7 @@ public class AuthController {
         }catch (Exception e){ throw  new RuntimeException("System could not authenticate user"); }
     }
 
-    @GetMapping
+    @GetMapping("logout")
     public ResponseEntity<String> logOut(HttpServletRequest request) {
         authService.logout(request);
         return ResponseEntity.ok("logout successful");
@@ -38,8 +38,8 @@ public class AuthController {
 
     @PreAuthorize("hasAuthority('READ_MY_PROFILE')")
     @GetMapping("/profile")
-    public ResponseEntity<User> getProfile(){
-        User user= authService.findLoggedInUser();
+    public ResponseEntity<User> getProfile(@RequestBody String token){
+        User user= authService.findLoggedInUser(token);
         return  ResponseEntity.ok(user);
     }
     @PreAuthorize("permitAll()")

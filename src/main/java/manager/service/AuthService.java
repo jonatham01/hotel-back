@@ -94,11 +94,8 @@ public class AuthService {
         }
     }
 
-    public User findLoggedInUser() {
-
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-
-        String username = (String) authentication.getPrincipal();
+    public User findLoggedInUser(String token) {
+        String username = jwtTokenService.extractUsername(token);
         return userService.findOneByUserName(username)
                 .orElseThrow(() -> new RuntimeException("User not found"));
     }
