@@ -32,8 +32,8 @@ public class HotelController {
         return ResponseEntity.ok().body(hotelToHotelResponse(updatedHotel));
     }
 
-    @DeleteMapping("delete/one")
-    public ResponseEntity<Boolean> deleteHotel(Integer id) {
+    @DeleteMapping("delete/{id}")
+    public ResponseEntity<Boolean> deleteHotel(@PathVariable Integer id) {
         return ResponseEntity.ok().body(hotelService.deleteHotel(id));
 
     }
@@ -44,7 +44,7 @@ public class HotelController {
         return ResponseEntity.ok().body(hotels.stream().map(hotel -> hotelToHotelResponse(hotel)).toList());
     }
 
-    @GetMapping("find/id/{id}")
+    @GetMapping("find/{id}")
     public ResponseEntity<HotelResponse> findHotelById(@PathVariable Integer id){
         Hotel hotel = hotelService.getHotelById(id);
         return ResponseEntity.ok().body(hotelToHotelResponse(hotel));
