@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
 public class AuthController {
     private final AuthService authService;
 
-    @PostMapping
+    @PostMapping("save")
     public ResponseEntity<UserResponseDTO> createNewUser(@RequestBody UserRequestDTO dto) {
         try{ return ResponseEntity.ok(authService.registerUser(dto));
         }catch (Exception e){ throw  new RuntimeException("System could not create new user"); }
