@@ -22,8 +22,6 @@ public class Hotel {
     private String hotelName;
     @Column(name="hotel_address")
     private String hotelAddress;
-    @Column(name="hotel_email")
-    private String hotelEmail;
     @Column(name="hotel_city")
     private String hotelCity;
     @Column(name="hotel_state")

@@ -1,8 +1,10 @@
 package manager.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import lombok.RequiredArgsConstructor;
+import manager.dto.HotelRequest;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 import manager.entity.Hotel;
@@ -41,12 +43,19 @@ public class HotelService {
             throw new RuntimeException("System could not save new hotel, try again.");
         }
     }
-    public Hotel updateHotel(Hotel hotel) {
-        HotelException.validate(hotel);
-        if(hotelRepository.findById(hotel.getHotelId()).isEmpty()) {
+    public Hotel updateHotel(HotelRequest dto, Integer id) {
+        //HotelException.validate(hotel);
+        Optional<Hotel> optional =hotelRepository.findById(id);
+        if(optional.isEmpty()) {
             throw new RuntimeException("System could not find hotel");
         }
         try{
+            Hotel hotel = optional.get();
+            hotel.setHotelName(dto.getName());
+            hotel.setHotelAddress(dto.getAddress());
+            hotel.setHotelCity(dto.getCity());
+            hotel.setHotelState(dto.getState());
+            hotel.setHotelCountry(dto.getCountry());
             Hotel updatedHotel = hotelRepository.save(hotel);
             return updatedHotel;
         }catch (DataAccessException e) {
