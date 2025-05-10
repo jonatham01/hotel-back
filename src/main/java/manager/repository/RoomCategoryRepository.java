@@ -11,7 +11,8 @@ import java.util.Optional;
 
 @Repository
 public interface RoomCategoryRepository  extends JpaRepository<RoomCategory, Integer> {
-    List<RoomCategory> findByRoomCategoryHotelId(Integer id);
+    //List<RoomCategory> findByRoomCategoryHotelId(Integer id);
+    List<RoomCategory> findByHotel_HotelId(Integer hotelId);
     Optional<RoomCategory> findByRoomCategoryName(String roomCategoryName);
 
     @Query("SELECT r FROM RoomCategory r WHERE (r.roomCategoryPrice BETWEEN :minPrice AND :maxPrice AND r.hotel.hotelId = :hotelId) OR (:roomCategoryName IS NOT NULL AND r.roomCategoryName = :roomCategoryName) AND r.hotel.hotelId = :hotelId")

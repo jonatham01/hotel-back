@@ -23,6 +23,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class RoomCategoryGalleryService {
 
+    private final RoomCategoryRepository roomCategoryRepository;
     @Value("${gallery.upload.path:src/main/resources/static/uploads}")
     private String uploadDir;
 
@@ -50,7 +51,8 @@ public class RoomCategoryGalleryService {
         gallery.setRoomGalleryDescription(description);
         gallery.setRoomGalleryImageUrl("/uploads/" + filename);
         gallery.setRoomCategory(category);
-        gallery.setRoomCategoryId(categoryId);
+        RoomCategory roomCategory = roomCategoryRepository.findById(categoryId).orElseThrow(() -> new IllegalArgumentException("Invalid room category ID"));
+        gallery.setRoomCategory(roomCategory);
 
         return repository.save(gallery);
     }
@@ -59,7 +61,7 @@ public class RoomCategoryGalleryService {
         return repository.findAll();
     }
 
-    public void delete(BigInteger id) {
+    public void delete(Long id) {
         repository.deleteById(id);
     }
 }

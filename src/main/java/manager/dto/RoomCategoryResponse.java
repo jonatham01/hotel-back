@@ -20,7 +20,6 @@ public class RoomCategoryResponse {
     private String roomCategoryName;
     private Double roomCategoryPrice;
     private String roomCategoryDescription;
-    private BigInteger roomCategoryGallery;
     private Hotel hotel;
     private List<RoomAttributeResponseDTO> roomAttributes;
     private List<RoomCategoryGallery> roomCategoryGalleries;

@@ -8,6 +8,8 @@ import java.math.BigInteger;
 import java.util.List;
 
 @Repository
-public interface FeeRepository extends JpaRepository<Fee, BigInteger> {
-    List<Fee> findByRoomCategoryId(BigInteger customerId);
+public interface FeeRepository extends JpaRepository<Fee, Long> {
+    //List<Fee> findByRoomCategoryId(Integer customerId);
+    List<Fee> findByRoomCategoryRoomCategoryId(Integer roomCategoryId);
+
 }

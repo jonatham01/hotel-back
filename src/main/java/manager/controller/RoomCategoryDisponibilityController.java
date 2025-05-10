@@ -31,7 +31,7 @@ public class RoomCategoryDisponibilityController {
         return ResponseEntity.ok(service.findAllDisponibility());
     }
     @GetMapping(path= "id/{id}")
-    public ResponseEntity<RoomCategoryDisponibility> getRoomCategoryDisponibility(@PathVariable BigInteger disponibilityId) throws RCDisponibilityException {
+    public ResponseEntity<RoomCategoryDisponibility> getRoomCategoryDisponibility(@PathVariable Long disponibilityId) throws RCDisponibilityException {
         return ResponseEntity.ok(service.findDisponibilityById(disponibilityId).get());
     }
     @GetMapping(path = "/filter/{roomCategoryId}/{date}", name = "filter")
@@ -39,7 +39,7 @@ public class RoomCategoryDisponibilityController {
         return ResponseEntity.ok(service.findDisponibilityByRoomCategory(roomCategoryId,date).get());
     }
     @PutMapping("update/{id}")
-    public ResponseEntity<RoomCategoryDisponibility> modify(@RequestBody RCDisponibilityRequest dto, @PathVariable BigInteger id) throws RCDisponibilityException {
+    public ResponseEntity<RoomCategoryDisponibility> modify(@RequestBody RCDisponibilityRequest dto, @PathVariable Long id) throws RCDisponibilityException {
         return ResponseEntity.ok(service.update(dto,id));
     }
 

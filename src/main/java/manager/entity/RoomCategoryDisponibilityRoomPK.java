@@ -17,9 +17,9 @@ public class RoomCategoryDisponibilityRoomPK {
     @Column(name = "room_id")
     private Integer roomId;
     @Column(name = "disponibility_id")
-    private BigInteger roomCategoryDisponibilityId;
+    private Long roomCategoryDisponibilityId;
 
-    public RoomCategoryDisponibilityRoomPK(Integer roomId, BigInteger roomCategoryDisponibilityId) {
+    public RoomCategoryDisponibilityRoomPK(Integer roomId, Long roomCategoryDisponibilityId) {
         this.roomId = roomId;
         this.roomCategoryDisponibilityId = roomCategoryDisponibilityId;
     }

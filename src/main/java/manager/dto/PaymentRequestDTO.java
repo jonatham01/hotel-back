@@ -12,6 +12,6 @@ import java.math.BigInteger;
 public class PaymentRequestDTO {
     private BigDecimal paymentTotalAmount;
     private LocalDateTime paymentDate;
-    private BigInteger paymentClientId;
+    private Long paymentClientId;
 }
 

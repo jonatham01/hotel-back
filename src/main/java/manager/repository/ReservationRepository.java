@@ -8,7 +8,7 @@ import java.math.BigInteger;
 import java.util.Optional;
 
 @Repository
-public interface ReservationRepository extends JpaRepository<Reservation, BigInteger> {
+public interface ReservationRepository extends JpaRepository<Reservation, Long> {
     Optional<Reservation> findById(BigInteger id);
     Optional<Reservation> findByReservationRoomId(BigInteger id);
     Optional<Reservation> findByPaymentStatus(String status);

@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.math.BigInteger;
 
 @Repository
-public interface RoomCategoryGalleryRepository extends JpaRepository<RoomCategoryGallery, BigInteger> {
+public interface RoomCategoryGalleryRepository extends JpaRepository<RoomCategoryGallery, Long> {
     boolean existsByTittle(String tittle);
     boolean existsByRoomGalleryImageUrl(String url);
 }

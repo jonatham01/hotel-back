@@ -46,7 +46,7 @@ public class RoomCategoryGalleryController {
     }
 
     @DeleteMapping("id/{id}")
-    public ResponseEntity<Void> delete(@PathVariable BigInteger id) {
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
         service.delete(id);
         return ResponseEntity.noContent().build();
     }

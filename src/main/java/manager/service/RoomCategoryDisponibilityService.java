@@ -39,7 +39,7 @@ public class RoomCategoryDisponibilityService {
             throw new RCDisponibilityException("System could not find all disponibilities");
         }
     }
-    public Optional<RoomCategoryDisponibility> findDisponibilityById(BigInteger id) throws RCDisponibilityException {
+    public Optional<RoomCategoryDisponibility> findDisponibilityById(Long id) throws RCDisponibilityException {
         try {
             return repository.findById(id);
         }catch (Exception e) {
@@ -53,7 +53,7 @@ public class RoomCategoryDisponibilityService {
             throw new RCDisponibilityException("System could not find disponibility");
         }
     }
-    public RoomCategoryDisponibility update(RCDisponibilityRequest dto, BigInteger id) throws RCDisponibilityException {
+    public RoomCategoryDisponibility update(RCDisponibilityRequest dto, Long id) throws RCDisponibilityException {
         if (!repository.existsById(id)) throw new RCDisponibilityException("System could not find disponibility");
         try {
             RoomCategoryDisponibility entity = repository.findById(id).get();

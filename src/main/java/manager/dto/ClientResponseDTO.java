@@ -9,7 +9,7 @@ import java.time.LocalDate;
 @Data
 @Builder
 public class ClientResponseDTO {
-    private BigInteger idNumber;
+    private Long idNumber;
     private String typeIdentifier;
     private String firstName;
     private String lastName;

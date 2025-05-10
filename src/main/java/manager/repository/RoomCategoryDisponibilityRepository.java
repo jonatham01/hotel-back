@@ -9,7 +9,7 @@ import java.time.LocalDate;
 import java.util.Optional;
 
 @Repository
-public interface RoomCategoryDisponibilityRepository extends JpaRepository<RoomCategoryDisponibility, BigInteger> {
+public interface RoomCategoryDisponibilityRepository extends JpaRepository<RoomCategoryDisponibility, Long> {
     boolean existsByRoomCategoryIdAAndDate(int id, LocalDate date);
     Optional<RoomCategoryDisponibility> findByRoomCategoryIdAAndDate(int id, LocalDate date);
 }

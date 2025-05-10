@@ -7,7 +7,7 @@ import java.time.LocalDate;
 
 @Data
 public class GuestResponseDTO {
-    private BigInteger idNumber;
+    private Long idNumber;
     private String typeIdentifier;
     private String firstName;
     private String lastName;

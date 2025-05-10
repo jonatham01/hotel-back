@@ -16,7 +16,7 @@ import java.math.BigInteger;
 public class Person {
     @Id
     @Column(unique = true, nullable = false, name = "id_number")
-    private BigInteger idNumber;
+    private Long idNumber;
     @Column(name = "type_identifier")
     private String typeIdentifier;
     @Column(name="first_name")

@@ -69,7 +69,7 @@ public class RoomCategoryService {
     public List<RoomCategoryResponse> findByParameters(String name, double min, double max, Integer hotelId){
         List<RoomCategory> roomCategory;
         if(name==null && Double.isNaN(min) && Double.isNaN(max)){
-            roomCategory = repository.findByRoomCategoryHotelId(hotelId);
+            roomCategory = repository.findByHotel_HotelId(hotelId);
         }else{
             roomCategory = repository.findRoomCategories(min, max, hotelId, name);
         }
@@ -81,7 +81,6 @@ public class RoomCategoryService {
         roomCategory.setRoomCategoryName(dto.getRoomCategoryName());
         roomCategory.setRoomCategoryPrice(dto.getRoomCategoryPrice());
         roomCategory.setRoomCategoryDescription(dto.getRoomCategoryDescription());
-        roomCategory.setRoomCategoryGallery(dto.getRoomCategoryGallery());
         if(roomCategory.getHotel().getHotelId() !=dto.getRoomCategoryHotelId()){
             roomCategory.setHotel(hotelRepository.findById(dto.getRoomCategoryHotelId()).orElseThrow(()->new RuntimeException("System could not find hotel")));
         }

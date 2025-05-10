@@ -16,7 +16,7 @@ public class RoomCategoryMapper {
         newEntity.setRoomCategoryDescription(roomCategory.getRoomCategoryDescription());
         newEntity.setRoomCategoryName(roomCategory.getRoomCategoryName());
         newEntity.setRoomCategoryPrice(roomCategory.getRoomCategoryPrice());
-        newEntity.setRoomCategoryGallery(roomCategory.getRoomCategoryGallery());
+
         return newEntity;
     }
 
@@ -27,7 +27,7 @@ public class RoomCategoryMapper {
                 .roomCategoryName(roomCategory.getRoomCategoryName())
                 .roomCategoryDescription(roomCategory.getRoomCategoryDescription())
                 .roomCategoryPrice(roomCategory.getRoomCategoryPrice())
-                .roomCategoryGallery(roomCategory.getRoomCategoryGallery())
+
                 .hotel(roomCategory.getHotel())
                 .roomAttributes(roomAttributeDto)
                 .roomCategoryGalleries(roomCategory.getRoomCategoryGalleries())

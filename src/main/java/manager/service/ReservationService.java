@@ -137,13 +137,13 @@ public class ReservationService {
                 .collect(Collectors.toList());
     }
 
-    public ReservationResponseDTO getReservationById(BigInteger id) {
+    public ReservationResponseDTO getReservationById(Long id) {
         return reservationRepository.findById(id)
                 .map(reservationMapper::toDTO)
                 .orElseThrow(() -> new EntityNotFoundException("Reservation not found"));
     }
 
-    public ReservationResponseDTO updateReservation(BigInteger id, ReservationRequestDTO dto) {
+    public ReservationResponseDTO updateReservation(Long id, ReservationRequestDTO dto) {
         Reservation existing = reservationRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Reservation not found"));
 
@@ -153,7 +153,7 @@ public class ReservationService {
         return reservationMapper.toDTO(reservationRepository.save(updated));
     }
 
-    public void deleteReservation(BigInteger id) {
+    public void deleteReservation(Long id) {
         if (!reservationRepository.existsById(id)) {
             throw new EntityNotFoundException("Reservation not found");
         }

@@ -15,5 +15,5 @@ public class PaymentTransactionResponseDTO {
     private String kind;
     private LocalDateTime dateTime;
     private UUID paymentId;
-    private BigInteger clientId;
+    private Long clientId;
 }

@@ -16,5 +16,5 @@ public class ReservationRequestDTO {
     private Integer reservationHotelId;
     private Integer reservationRoomCategoryId;
 
-    private BigInteger reservationClientId;
+    private Long reservationClientId;
 }

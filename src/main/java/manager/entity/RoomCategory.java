@@ -29,10 +29,6 @@ public class RoomCategory {
     @Column(name = "room_category_description")
     private String roomCategoryDescription;
 
-    //CREATE PHOTO GALERY
-    @Column(name= "room_category_gallery")
-    private BigInteger roomCategoryGallery;
-
     //@Column(name = "room_category_hotel_id",nullable = false)
     //private Integer roomCategoryHotelId;
 

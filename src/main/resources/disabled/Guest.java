@@ -1,4 +1,4 @@
-package manager.entity;
+package disabled;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 import manager.core.Person;
 
 import java.time.LocalDate;
-import java.time.LocalTime;
 
 @EqualsAndHashCode(callSuper = true)
 @Entity

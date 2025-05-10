@@ -14,7 +14,7 @@ import java.util.UUID;
 //un payment tiene un listado de reservaciones de una habitacion
 // primero se crea como pendiente, luego se registra como pagado.
 @Entity
-@Table(name = "payments")
+@Table(name = "payment")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -32,7 +32,7 @@ public class Payment{
     private LocalDateTime paymentDate;
 
     @Column(name = "reservation_client_id")
-    private BigInteger paymentClientId;
+    private Long paymentClientId;
 
     @OneToMany(mappedBy = "reservationPayment")
     List<Reservation> paymentReservations;

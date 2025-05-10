@@ -15,6 +15,5 @@ public class RoomCategoryRequest {
     private String roomCategoryName;
     private Double roomCategoryPrice;
     private String roomCategoryDescription;
-    private BigInteger roomCategoryGallery;
     private Integer roomCategoryHotelId;
 }

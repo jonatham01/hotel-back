@@ -31,7 +31,7 @@ public class RoomCategoryDisponibilityRoomService {
         return repository.findById(id);
     }
 
-    public List<RoomCategoryDisponibilityRoom> findByRoomId(Long roomId) {
+    public List<RoomCategoryDisponibilityRoom> findByRoomId(Integer roomId) {
         return repository.findByRoom_Id(roomId);
     }
 

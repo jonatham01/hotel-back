@@ -14,5 +14,5 @@ public class PaymentResponseDTO {
     private UUID id;
     private BigDecimal paymentTotalAmount;
     private LocalDateTime paymentDate;
-    private BigInteger paymentClientId;
+    private Long paymentClientId;
 }

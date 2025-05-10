@@ -1,11 +1,10 @@
-package manager.mapper;
+package disabled;
 
 import lombok.AllArgsConstructor;
 import manager.dto.GuestRequestDTO;
 import manager.dto.GuestResponseDTO;
 import manager.entity.Guest;
 import manager.repository.HotelRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component

@@ -25,7 +25,7 @@ public class RoomCategoryDisponibilityRoomController {
     @GetMapping("/by-id")
     public ResponseEntity<RoomCategoryDisponibilityRoom> getById(
             @RequestParam Integer roomId,
-            @RequestParam BigInteger disponibilityId
+            @RequestParam Long disponibilityId
     ) {
         RoomCategoryDisponibilityRoomPK id = new RoomCategoryDisponibilityRoomPK(roomId,disponibilityId);
         return service.findById(id)
@@ -41,7 +41,7 @@ public class RoomCategoryDisponibilityRoomController {
     @DeleteMapping
     public ResponseEntity<Void> delete(
             @RequestParam Integer roomId,
-            @RequestParam BigInteger disponibilityId
+            @RequestParam Long disponibilityId
     ) {
         RoomCategoryDisponibilityRoomPK id = new RoomCategoryDisponibilityRoomPK(roomId,disponibilityId);
         service.deleteById(id);
@@ -49,7 +49,7 @@ public class RoomCategoryDisponibilityRoomController {
     }
 
     @GetMapping("/by-room")
-    public List<RoomCategoryDisponibilityRoom> getByRoom(@RequestParam Long roomId) {
+    public List<RoomCategoryDisponibilityRoom> getByRoom(@RequestParam Integer roomId) {
         return service.findByRoomId(roomId);
     }
 

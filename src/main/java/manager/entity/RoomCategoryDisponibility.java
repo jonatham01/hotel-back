@@ -17,7 +17,7 @@ import java.util.List;
 public class RoomCategoryDisponibility {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private BigInteger id;
+    private Long id;
     @Column(name="category_id")
     private Integer categoryId;
     @Column(name="category_name")

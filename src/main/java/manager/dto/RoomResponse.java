@@ -2,9 +2,6 @@ package manager.dto;
 
 import lombok.Builder;
 import lombok.Data;
-import manager.entity.disabled.RoomOccupancy;
-
-import java.util.List;
 
 @Data
 @Builder

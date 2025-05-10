@@ -1,4 +1,4 @@
-package manager.service;
+package disabled;
 
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;

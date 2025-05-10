@@ -9,7 +9,7 @@ import java.math.BigInteger;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "room_category_fees")
+@Table(name = "fee")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -18,7 +18,7 @@ public class Fee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "fee_id")
-    private BigInteger roomCategoryFeeId;
+    private Long roomCategoryFeeId;
 
     @Column(name = "fee_public_value")
     private Double publicFee;

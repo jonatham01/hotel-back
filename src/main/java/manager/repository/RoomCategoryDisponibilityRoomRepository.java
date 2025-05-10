@@ -9,7 +9,7 @@ import java.util.List;
 
 @Repository
 public interface RoomCategoryDisponibilityRoomRepository extends JpaRepository<RoomCategoryDisponibilityRoom, RoomCategoryDisponibilityRoomPK> {
-    List<RoomCategoryDisponibilityRoom> findByRoom_Id(Long roomId);
+    List<RoomCategoryDisponibilityRoom> findByRoom_Id(Integer roomId);
     List<RoomCategoryDisponibilityRoom> findByDisponibility_Id(Integer disponibilityId);
 }
 

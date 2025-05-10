@@ -17,7 +17,7 @@ public class RoomCategoryGallery {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="room_category_gallery_id")
-    private BigInteger id;
+    private Long id;
 
     @Column(name="room_category_gallery_tittle", unique = true, nullable = false, length = 50)
     private String tittle;
@@ -25,9 +25,6 @@ public class RoomCategoryGallery {
     private String roomGalleryDescription;
     @Column(name="room_category_gallery_image", unique = true, nullable = false)
     private String roomGalleryImageUrl;
-
-    @Column(name = "room_category_gallery_category_id", insertable = false, updatable = false)
-    private Integer roomCategoryId;
 
     @ManyToOne
     @JoinColumn(name="room_category_gallery_category_id")

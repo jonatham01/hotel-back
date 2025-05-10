@@ -9,7 +9,7 @@ public class RoomCategoryException {
         if (roomCategory.getRoomCategoryDescription() == null) throw new ApiUnProcessableEntity("Room category description is required");
         if (roomCategory.getRoomCategoryName() == null) throw new ApiUnProcessableEntity("Room category name is required");
         if (roomCategory.getRoomCategoryPrice()==null) throw new ApiUnProcessableEntity("Room category price is required");
-        if (roomCategory.getRoomCategoryGallery() == null) throw new ApiUnProcessableEntity("Room category description is required");
+
     }
     public static void dontExist() throws ApiUnProcessableEntity{
         throw new ApiUnProcessableEntity("Room category does not exist in Database");

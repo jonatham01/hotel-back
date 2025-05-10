@@ -9,7 +9,7 @@ import java.time.LocalDate;
 @Data
 @Builder
 public class FeeResponseDTO {
-    private BigInteger roomCategoryFeeId;
+    private Long roomCategoryFeeId;
     private Double publicFee;
     private LocalDate date;
     private Short incrementRate;

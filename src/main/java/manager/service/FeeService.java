@@ -9,8 +9,6 @@ import manager.mapper.FeeMapper;
 import manager.repository.FeeRepository;
 import manager.repository.RoomCategoryRepository;
 import org.springframework.stereotype.Service;
-
-import java.math.BigInteger;
 import java.util.List;
 
 @Service
@@ -34,14 +32,14 @@ public class FeeService {
     public List<FeeResponseDTO> findAll() {
         try{
             List<Fee> fees = feeRepository.findAll();
-            return fees.stream().map(FeeMapper::toDto)
+            return fees.stream().map(feeMapper::toDto)
                     .toList();
         }catch (Exception e){
             throw new RuntimeException("Find fees failed, try again");
         }
     }
 
-    public FeeResponseDTO findById(BigInteger id) {
+    public FeeResponseDTO findById(Long id) {
         try{
             return  feeMapper.toDto(
                     feeRepository.findById(id).get()
@@ -49,17 +47,17 @@ public class FeeService {
         }catch (Exception e){ throw new RuntimeException("Find fee failed, try again"); }
     }
 
-    public List<FeeResponseDTO> findByRoomCategoryId(BigInteger id) {
+    public List<FeeResponseDTO> findByRoomCategoryId(Integer id) {
         try{
-            List<Fee> fees = feeRepository.findByRoomCategoryId(id);
-            return fees.stream().map(FeeMapper::toDto)
+            List<Fee> fees = feeRepository.findByRoomCategoryRoomCategoryId(id);
+            return fees.stream().map(feeMapper::toDto)
                     .toList();
         }catch (Exception e){
             throw new RuntimeException("Find fees failed, try again");
         }
     }
 
-    public FeeResponseDTO update(FeeRequestDTO dto, BigInteger id) {
+    public FeeResponseDTO update(FeeRequestDTO dto, Long id) {
       try {
           RoomCategory roomCategory= roomCategoryRepository.findById(dto.getRoomCategoryId()).orElseThrow(() -> new RuntimeException("Room category not found"));
           Fee fee = feeRepository.findById(id).get();
@@ -73,7 +71,7 @@ public class FeeService {
           throw new RuntimeException("Update fee failed, try again"); }
         }
 
-    public void delete(BigInteger id) {
+    public void delete(Long id) {
         try{
             feeRepository.deleteById(id);
         }catch (Exception e){

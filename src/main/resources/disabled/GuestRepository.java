@@ -1,4 +1,4 @@
-package manager.repository;
+package disabled;
 
 import manager.entity.Guest;
 import org.springframework.data.jpa.repository.JpaRepository;

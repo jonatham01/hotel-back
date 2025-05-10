@@ -11,7 +11,7 @@ import java.util.UUID;
 @Data
 @Builder
 public class ReservationResponseDTO {
-    private BigInteger reservationId;
+    private Long reservationId;
     private LocalDate reservationStartDate;
     private LocalDate reservationEndDate;
     private BigDecimal reservationTotalValue;
@@ -20,5 +20,5 @@ public class ReservationResponseDTO {
     private Integer reservationHotelId;
     private Integer reservationRoomId;
     private UUID reservationPaymentId;
-    private BigInteger reservationClientId;
+    private Long reservationClientId;
 }

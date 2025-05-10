@@ -1,4 +1,4 @@
-package manager.controller;
+package disabled;
 
 import manager.dto.GuestRequestDTO;
 import manager.dto.GuestResponseDTO;

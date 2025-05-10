@@ -25,16 +25,7 @@ CREATE TABLE client (
                         origin_country VARCHAR(100),
                         live_country VARCHAR(100)
 );
-CREATE TABLE guest (
-                       id_number BIGINT PRIMARY KEY,
-                       guest_kind VARCHAR(50),
-                       guest_birthdate DATE,
-                       guest_start_date DATE,
-                       guest_end_date DATE,
-                       guest_hotel_id INT,
-                       FOREIGN KEY (id_number) REFERENCES client(id_number),
-                       FOREIGN KEY (guest_hotel_id) REFERENCES hotel(hotel_id)
-);
+
 
 CREATE TABLE hotel_phone (
                              number VARCHAR(20) PRIMARY KEY,
@@ -123,13 +114,7 @@ CREATE TABLE reservation (
                              FOREIGN KEY (reservation_client_id) REFERENCES client(id_number)
 );
 
-CREATE TABLE reservation_guest (
-                                   reservation_guest_reservation_id BIGINT,
-                                   reservation_guest_guest_id BIGINT,
-                                   PRIMARY KEY (reservation_guest_reservation_id, reservation_guest_guest_id),
-                                   FOREIGN KEY (reservation_guest_reservation_id) REFERENCES reservation(reservation_id),
-                                   FOREIGN KEY (reservation_guest_guest_id) REFERENCES guest(id_number)
-);
+
 
 
 

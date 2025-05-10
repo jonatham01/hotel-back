@@ -30,7 +30,7 @@ public class PaymentTransactionService {
             throw new RuntimeException("Error saving PaymentTransaction");
         }
         PaymentTransactionResponseDTO responseDTO = PaymentTransactionMapper.mapToDTO(paymentTransaction);
-        BigInteger clientId =  paymentRepository.findById(responseDTO.getPaymentId()).orElseThrow().getPaymentClientId();
+        Long clientId =  paymentRepository.findById(responseDTO.getPaymentId()).orElseThrow().getPaymentClientId();
         responseDTO.setClientId(clientId);
         return responseDTO;
     }
@@ -55,7 +55,7 @@ public class PaymentTransactionService {
         paymentTransaction.setPaymentCashId(id);
         paymentTransaction = paymentTransactionRepository.save(paymentTransaction);
         PaymentTransactionResponseDTO responseDTO = PaymentTransactionMapper.mapToDTO(paymentTransaction);
-        BigInteger clientId =  paymentRepository.findById(responseDTO.getPaymentId()).orElseThrow().getPaymentClientId();
+        Long clientId =  paymentRepository.findById(responseDTO.getPaymentId()).orElseThrow().getPaymentClientId();
         responseDTO.setClientId(clientId);
         return responseDTO;
     }

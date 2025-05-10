@@ -30,7 +30,7 @@ public class ClientService {
         }
     }
 
-    public ClientResponseDTO getClientById(BigInteger idNumber) {
+    public ClientResponseDTO getClientById(Long idNumber) {
         return clientRepository.findById(idNumber)
                 .map(clientMapper::toDTO)
                 .orElseThrow(() -> new EntityNotFoundException("Client not found"));
@@ -47,7 +47,7 @@ public class ClientService {
         }
     }
 
-    public boolean deleteClient(BigInteger idNumber) {
+    public boolean deleteClient(Long idNumber) {
         try {
             clientRepository.deleteById(idNumber);
             return true;
@@ -56,7 +56,7 @@ public class ClientService {
         }
     }
 
-    public ClientResponseDTO updateClient(BigInteger idNumber, ClientRequestDTO dto) {
+    public ClientResponseDTO updateClient(Long idNumber, ClientRequestDTO dto) {
         Client existing = clientRepository.findById(idNumber)
                 .orElseThrow(() -> new EntityNotFoundException("Client not found"));
 

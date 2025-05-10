@@ -29,18 +29,18 @@ public class ReservationController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ReservationResponseDTO> getById(@PathVariable BigInteger id) {
+    public ResponseEntity<ReservationResponseDTO> getById(@PathVariable Long id) {
         return ResponseEntity.ok(reservationService.getReservationById(id));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ReservationResponseDTO> update(@PathVariable BigInteger id,
+    public ResponseEntity<ReservationResponseDTO> update(@PathVariable Long id,
                                                          @RequestBody ReservationRequestDTO dto) {
         return ResponseEntity.ok(reservationService.updateReservation(id, dto));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable BigInteger id) {
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
         reservationService.deleteReservation(id);
         return ResponseEntity.noContent().build();
     }

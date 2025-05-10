@@ -1,4 +1,4 @@
-package manager.entity.disabled;
+package disabled;
 
 
 import jakarta.persistence.Column;
