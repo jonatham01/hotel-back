@@ -28,18 +28,18 @@ public class PaymentController {
         return ResponseEntity.ok(paymentService.getAll());
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/id/{id}")
     public ResponseEntity<PaymentResponseDTO> getById(@PathVariable UUID id) {
         return ResponseEntity.ok(paymentService.getById(id));
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/update/{id}")
     public ResponseEntity<PaymentResponseDTO> update(@PathVariable UUID id,
                                                      @RequestBody PaymentRequestDTO dto) {
         return ResponseEntity.ok(paymentService.update(id, dto));
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("delete/{id}")
     public ResponseEntity<Void> delete(@PathVariable UUID id) {
         paymentService.delete(id);
         return ResponseEntity.noContent().build();

@@ -30,20 +30,20 @@ public class RoomCategoryController {
         //modificar
             return ResponseEntity.ok().body(roomCategoryService.findByParameters(name, min, max, hotelId));
     }
-    @GetMapping("available")
-    public List<RoomCategoryResponse> findAvailableRooms(LocalDate date) {
+    @GetMapping("available/{date}")
+    public List<RoomCategoryResponse> findAvailableRooms(@PathVariable LocalDate date) {
         return roomCategoryService.findByDisponibility(date);
     }
     @PostMapping()
     public ResponseEntity<RoomCategoryResponse> create(@RequestBody RoomCategoryRequest roomCategoryRequest) {
         return ResponseEntity.ok().body(roomCategoryService.createRoomCategory(roomCategoryRequest));
     }
-    @PutMapping()
-    public ResponseEntity<RoomCategoryResponse> update(@RequestBody RoomCategory roomCategory) {
-        return ResponseEntity.ok().body(roomCategoryService.update(roomCategory));
+    @PutMapping("update/{id}")
+    public ResponseEntity<RoomCategoryResponse> update(@RequestBody RoomCategoryRequest roomCategory, Integer id) {
+        return ResponseEntity.ok().body(roomCategoryService.update(roomCategory,id));
     }
-    @DeleteMapping()
-    public ResponseEntity<String> delete(@RequestParam Integer id) {
+    @DeleteMapping("delete/{id}")
+    public ResponseEntity<String> delete(@PathVariable Integer id) {
         roomCategoryService.deleteById(id);
         return ResponseEntity.ok().body("Room category have been deleted");
     }

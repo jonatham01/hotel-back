@@ -76,11 +76,21 @@ public class RoomCategoryService {
         if(roomCategory.isEmpty())RoomCategoryException.exception("System could not find any Room category");
         return roomCategory.stream().map(RoomCategoryMapper::entityToDto).toList();
     }
-    public RoomCategoryResponse update(RoomCategory roomCategory) {
-       if (!repository.existsById(roomCategory.getRoomCategoryId())) RoomCategoryException.dontExist();
-       RoomCategoryException.validate(roomCategory);
-       RoomCategory updatedRoomCategory = repository.save(roomCategory);
-       if(updatedRoomCategory.getRoomCategoryId() ==null) RoomCategoryException.exception("Room category could not be updated. Try again");
+    public RoomCategoryResponse update(RoomCategoryRequest dto, Integer id) {
+        RoomCategory roomCategory = repository.findById(id).orElseThrow(()->new RuntimeException("System could not find room category"));
+        roomCategory.setRoomCategoryName(dto.getRoomCategoryName());
+        roomCategory.setRoomCategoryPrice(dto.getRoomCategoryPrice());
+        roomCategory.setRoomCategoryDescription(dto.getRoomCategoryDescription());
+        roomCategory.setRoomCategoryGallery(dto.getRoomCategoryGallery());
+        if(roomCategory.getHotel().getHotelId() !=dto.getRoomCategoryHotelId()){
+            roomCategory.setHotel(hotelRepository.findById(dto.getRoomCategoryHotelId()).orElseThrow(()->new RuntimeException("System could not find hotel")));
+        }
+       try {
+           RoomCategory updatedRoomCategory = repository.save(roomCategory);
+       }catch (Exception e) {
+           RoomCategoryException.exception("Room category could not be updated. Try again");
+       }
+
        return RoomCategoryMapper.entityToDto(updatedRoomCategory);
     }
 

@@ -25,7 +25,7 @@ public class RoomAttributeController {
     public ResponseEntity<List<RoomAttributeResponseDTO>> getRoomAttribute() {
         return ResponseEntity.ok().body(service.getAll());
     }
-    @GetMapping("byid")
+    @GetMapping("id")
     public ResponseEntity<RoomAttributeResponseDTO> getRoomAttributeById(@RequestParam int id) {
         return ResponseEntity.ok().body(service.getById(id));
     }
@@ -50,8 +50,8 @@ public class RoomAttributeController {
         return ResponseEntity.ok(response);
     }
 
-    @DeleteMapping
-    public ResponseEntity<Boolean> deleteRoomAttribute(@RequestParam int id) {
+    @DeleteMapping("delete/{id}")
+    public ResponseEntity<Boolean> deleteRoomAttribute(@PathVariable int id) {
         return ResponseEntity.ok().body(service.delete(id));
     }
 }
