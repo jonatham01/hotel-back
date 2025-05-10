@@ -19,12 +19,12 @@ public class FeeController {
     public ResponseEntity<List<FeeResponseDTO>> getFees() {
         return ResponseEntity.ok(feeService.findAll());
     }
-    @GetMapping(name = "id")
+    @GetMapping(path = "id")
     public ResponseEntity<FeeResponseDTO> getFee(@RequestParam Long id) {
         return ResponseEntity.ok(feeService.findById(id));
     }
 
-    @GetMapping(name = "category")
+    @GetMapping(path = "category")
     public ResponseEntity<List<FeeResponseDTO>> getFeeByRoomCategoryId(@RequestParam Integer idCategory) {
         List<FeeResponseDTO> responseDTOS= feeService.findByRoomCategoryId(idCategory);
         return ResponseEntity.ok().body(responseDTOS);
@@ -35,12 +35,12 @@ public class FeeController {
         return ResponseEntity.ok(fee);
     }
 
-    @PutMapping("id/{id}")
+    @PutMapping(path="id/{id}")
     public ResponseEntity<FeeResponseDTO> updateFee(@RequestBody FeeRequestDTO feeRequestDTO, @PathVariable Long id) {
         FeeResponseDTO fee= feeService.update(feeRequestDTO, id);
         return ResponseEntity.ok(fee);
     }
-    @DeleteMapping("id/{id}")
+    @DeleteMapping(path="id/{id}")
     public ResponseEntity<?> deleteFee(@PathVariable Long id) {
         feeService.delete(id);
         return ResponseEntity.ok().build();

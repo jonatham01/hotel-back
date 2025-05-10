@@ -60,7 +60,7 @@ public class RoomCategoryService {
     public List<RoomCategoryResponse> findByDisponibility(LocalDate date) {
         return findAll().stream()
                 .filter( roomCategoryResponse -> {
-                    Optional<RoomCategoryDisponibility> roomCategoryDisponibility = disponibilityRepository.findByRoomCategoryIdAAndDate(roomCategoryResponse.getRoomCategoryId(),date);
+                    Optional<RoomCategoryDisponibility> roomCategoryDisponibility = disponibilityRepository.findByCategoryIdAndDate(roomCategoryResponse.getRoomCategoryId(),date);
                         if(roomCategoryDisponibility.isEmpty()) return true;
                         return roomCategoryDisponibility.get().getDisponibilityLevel() >0;
                         }

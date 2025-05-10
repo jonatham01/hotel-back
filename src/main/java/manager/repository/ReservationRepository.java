@@ -9,9 +9,9 @@ import java.util.Optional;
 
 @Repository
 public interface ReservationRepository extends JpaRepository<Reservation, Long> {
-    Optional<Reservation> findById(BigInteger id);
-    Optional<Reservation> findByReservationRoomId(BigInteger id);
-    Optional<Reservation> findByPaymentStatus(String status);
+    Optional<Reservation> findById(Long id);
+//    Optional<Reservation> findByReservationRoomId(BigInteger id);
+//    Optional<Reservation> findByPaymentStatus(String status);
 
 }
 

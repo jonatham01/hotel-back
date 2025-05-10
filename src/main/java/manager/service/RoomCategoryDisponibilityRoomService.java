@@ -32,7 +32,7 @@ public class RoomCategoryDisponibilityRoomService {
     }
 
     public List<RoomCategoryDisponibilityRoom> findByRoomId(Integer roomId) {
-        return repository.findByRoom_Id(roomId);
+        return repository.findByRoom_RoomId(roomId);
     }
 
     public List<RoomCategoryDisponibilityRoom> findByDisponibilityId(Integer disponibilityId) {

@@ -52,7 +52,7 @@ public class ReservationService {
         try {
             //genero bucle para agregar todas las Room category disponibilities en una lista
             dates.stream().forEach( localDate -> {
-                Optional<RoomCategoryDisponibility> disponibility = reservationCategoryDisponibilityRepository.findByRoomCategoryIdAAndDate(
+                Optional<RoomCategoryDisponibility> disponibility = reservationCategoryDisponibilityRepository.findByCategoryIdAndDate(
                         dto.getReservationRoomCategoryId(),
                         localDate
                 );
@@ -75,7 +75,7 @@ public class ReservationService {
            //disponibilities creation to disable reserved rooms
             String name = roomCategoryRepository.findById(dto.getReservationRoomCategoryId()).get().getRoomCategoryName();
             dates.forEach(localDate -> {
-                Optional<RoomCategoryDisponibility> reservationCategoryDisponibility = reservationCategoryDisponibilityRepository.findByRoomCategoryIdAAndDate(
+                Optional<RoomCategoryDisponibility> reservationCategoryDisponibility = reservationCategoryDisponibilityRepository.findByCategoryIdAndDate(
                         dto.getReservationRoomCategoryId(),
                         localDate
                 );

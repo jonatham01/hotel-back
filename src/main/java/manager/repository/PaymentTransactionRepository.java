@@ -10,6 +10,6 @@ import java.util.UUID;
 
 @Repository
 public interface PaymentTransactionRepository extends JpaRepository<PaymentTransaction, Integer> {
-    List<PaymentTransaction> findAllByPaymentCashPaymentId(UUID paymentCashPaymentId);
-    List<PaymentTransaction> findAllByPaymentCashTotalBetween(BigDecimal min, BigDecimal max);
+//     public List<PaymentTransaction> findAllByPayment_Id(UUID paymentId);
+//    List<PaymentTransaction> findAllByPaymentCashTotalBetween(BigDecimal min, BigDecimal max);
 }

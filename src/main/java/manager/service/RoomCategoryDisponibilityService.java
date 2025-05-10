@@ -48,7 +48,7 @@ public class RoomCategoryDisponibilityService {
     }
     public Optional<RoomCategoryDisponibility> findDisponibilityByRoomCategory(int id, LocalDate date) throws RCDisponibilityException {
         try{
-            return repository.findByRoomCategoryIdAAndDate(id,date);
+            return repository.findByCategoryIdAndDate(id,date);
         }catch (Exception e) {
             throw new RCDisponibilityException("System could not find disponibility");
         }
