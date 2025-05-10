@@ -30,9 +30,9 @@ import static org.springframework.security.config.Customizer.withDefaults;
 //@EnableMethodSecurity(prePostEnabled = true)
 public class HttpSecurityConfig {
 
-    private AuthenticationProvider authenticationProvider;
-    private AuthenticationEntryPoint authenticationEntryPoint;
-    private AccessDeniedHandler accessDeniedHandler;
+    private final AuthenticationProvider authenticationProvider;
+    private final AuthenticationEntryPoint authenticationEntryPoint;
+    private final AccessDeniedHandler accessDeniedHandler;
 
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http, JwtAuthenticationFilter jwtAuthenticationFilter) throws Exception {

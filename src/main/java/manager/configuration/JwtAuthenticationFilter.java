@@ -26,9 +26,9 @@ import java.util.Optional;
 @Component
 @RequiredArgsConstructor
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
-    private JwtTokenService jwtService;
-    private UserService userService;
-    private JwtTokenRepository jwtRepository;
+    private final JwtTokenService jwtService;
+    private final UserService userService;
+    private final JwtTokenRepository jwtRepository;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
