@@ -10,7 +10,7 @@ import manager.entity.Room;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "reception_room")
+//@Table(name = "reception_room")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

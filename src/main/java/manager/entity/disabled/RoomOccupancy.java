@@ -11,7 +11,7 @@ import java.math.BigInteger;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name="room_availability")
+//@Table(name="room_availability")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

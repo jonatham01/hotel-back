@@ -10,7 +10,7 @@ import java.math.BigInteger;
 
 
 @Entity
-@Table(name = "discounts")
+//@Table(name = "discounts")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

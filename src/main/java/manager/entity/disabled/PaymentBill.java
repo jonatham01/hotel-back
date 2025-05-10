@@ -9,7 +9,7 @@ import manager.entity.Payment;
 import java.util.List;
 
 @Entity
-@Table(name = "payment_bills")
+//@Table(name = "payment_bills")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

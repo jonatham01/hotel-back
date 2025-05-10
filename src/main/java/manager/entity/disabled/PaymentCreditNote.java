@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 import manager.entity.Payment;
 
 @Entity
-@Table(name = "payment_credit_notes")
+//@Table(name = "payment_credit_notes")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

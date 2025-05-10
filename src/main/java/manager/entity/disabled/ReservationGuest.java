@@ -11,7 +11,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name="reservation_guest")
+//@Table(name="reservation_guest")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

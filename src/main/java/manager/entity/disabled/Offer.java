@@ -12,7 +12,7 @@ import java.math.BigInteger;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "room_category_offers")
+//@Table(name = "room_category_offers")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
