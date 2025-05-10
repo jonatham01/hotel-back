@@ -28,7 +28,7 @@ public class RoomCategoryGalleryController {
             @RequestParam String tittle,
             @RequestParam String description,
             @RequestParam Integer categoryId,
-            @RequestParam MultipartFile image
+            @RequestPart MultipartFile image
     ) {
         try {
             RoomCategoryGallery gallery = service.save(tittle, description, image, categoryId);
@@ -45,7 +45,7 @@ public class RoomCategoryGalleryController {
         return service.getAll();
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("id/{id}")
     public ResponseEntity<Void> delete(@PathVariable BigInteger id) {
         service.delete(id);
         return ResponseEntity.noContent().build();
