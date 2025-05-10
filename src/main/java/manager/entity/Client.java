@@ -17,6 +17,7 @@ import java.util.List;
 @NoArgsConstructor
 public class Client extends Person {
     private String kind;
+    @Column(name = "birth_date")
     private LocalDate birthDate;
 
     @OneToMany(mappedBy = "reservationClient")

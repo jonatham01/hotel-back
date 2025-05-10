@@ -12,7 +12,7 @@ import java.time.LocalTime;
 
 @EqualsAndHashCode(callSuper = true)
 @Entity
-@Table(name = "guest")
+//@Table(name = "guest")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

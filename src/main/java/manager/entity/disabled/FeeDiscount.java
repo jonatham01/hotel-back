@@ -25,9 +25,9 @@ public class FeeDiscount {
     @Column(name="discount_amount")
     private int amount;
 
-
-    @ManyToOne()
-    @JoinColumn(name="discount_fee_id")
-    private Fee fee;
+//
+//    @ManyToOne()
+//    @JoinColumn(name="discount_fee_id")
+//    private Fee fee;
 
 }

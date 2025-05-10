@@ -42,13 +42,13 @@ public class Offer {
 
 
 
-    @ManyToOne()
-    @JoinColumn(name = "offer_category_id")
-    private RoomCategory roomCategory;
-
-    @ManyToOne()
-    @JoinColumn(name = "offer_hotel_id")
-    private Hotel hotel;
+//    @ManyToOne()
+//    @JoinColumn(name = "offer_category_id")
+//    private RoomCategory roomCategory;
+//
+//    @ManyToOne()
+//    @JoinColumn(name = "offer_hotel_id")
+//    private Hotel hotel;
 
 
 }

@@ -27,12 +27,12 @@ public class ReceptionRoom {
     @Column(name = "reception_check_kind")
     private String receptionCheckKind;
 
-    @ManyToOne
-    @JoinColumn(name = "reception_room_id")
-    private Room receptionRoom;
-
-    @ManyToOne
-    @JoinColumn(name = "reception_guest_id")
-    private Guest receptionGuest;
+//    @ManyToOne
+//    @JoinColumn(name = "reception_room_id")
+//    private Room receptionRoom;
+//
+//    @ManyToOne
+//    @JoinColumn(name = "reception_guest_id")
+//    private Guest receptionGuest;
 
 }

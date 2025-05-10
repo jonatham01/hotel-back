@@ -21,6 +21,6 @@ public class RoomCategoryDisponibilityRoom {
 
     @ManyToOne
     @MapsId("roomCategoryDisponibilityId") // <- enlaza con el campo roomCategoryDisponibilityId
-    @JoinColumn(name = "disponibility_id", referencedColumnName = "room_category_disponibility_id")
+    @JoinColumn(name = "disponibility_id", referencedColumnName = "id")
     private RoomCategoryDisponibility disponibility;
 }

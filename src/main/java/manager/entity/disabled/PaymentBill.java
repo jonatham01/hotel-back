@@ -24,10 +24,10 @@ public class PaymentBill {
     private String billTechSupplier;
 
 
-    @ManyToOne
-    @JoinColumn(name="bill_payment_id")
-    private Payment billPayment;
-
-    @OneToMany(mappedBy = "paymentNoteBill")
-    List<PaymentCreditNote> billCreditNotes;
+//    @ManyToOne
+//    @JoinColumn(name="bill_payment_id")
+//    private Payment billPayment;
+//
+//    @OneToMany(mappedBy = "paymentNoteBill")
+//    List<PaymentCreditNote> billCreditNotes;
 }

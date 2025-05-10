@@ -1,5 +1,6 @@
 package manager.core;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Id;
 import jakarta.persistence.MappedSuperclass;
 import lombok.AllArgsConstructor;
@@ -14,16 +15,21 @@ import java.math.BigInteger;
 @AllArgsConstructor
 public class Person {
     @Id
+    @Column(unique = true, nullable = false, name = "id_number")
     private BigInteger idNumber;
-
+    @Column(name = "type_identifier")
     private String typeIdentifier;
+    @Column(name="first_name")
     private String firstName;
+    @Column(name = "last_name")
     private String lastName;
     private String email;
     private Short age;
     private String gender;
     private String status;
+    @Column(name = "origin_country")
     private String originCountry;
+    @Column(name = "live_country")
     private String liveCountry;
 
 }

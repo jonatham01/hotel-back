@@ -18,11 +18,11 @@ public class PaymentCreditNote {
     private String creditNoteId;
     @Column(name = "credit_note_txt")
     private String CreditNoteDescription;
-
-
-    @ManyToOne
-    @JoinColumn(name="credit_note_payment_id")
-    private Payment creditNotePayment;
+//
+//
+//    @ManyToOne
+//    @JoinColumn(name="credit_note_payment_id")
+//    private Payment creditNotePayment;
 
 //    @ManyToOne
 //    @JoinColumn(name="credit_note_bill_id")

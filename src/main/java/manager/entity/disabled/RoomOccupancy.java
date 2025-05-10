@@ -42,9 +42,9 @@ public class RoomOccupancy {
 //    @JoinColumn(name="occupancy_room")
 //    private Room room;
 
-    @ManyToOne()
-    @JoinColumn(name="occupancy_reservation_id")
-    private Reservation reservation;
+//    @ManyToOne()
+//    @JoinColumn(name="occupancy_reservation_id")
+//    private Reservation reservation;
 
 
 }
