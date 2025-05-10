@@ -22,7 +22,7 @@ public class UserService {
         if(StringUtils.isEmpty(user.getPassword()) || StringUtils.isEmpty(user.getRepeatedPassword())){
             throw new BadRequestException("Password and Repeated Password are required");
         }
-        if(!passwordEncoder.matches(user.getPassword(), user.getRepeatedPassword())){
+        if(!user.getPassword().equals(user.getRepeatedPassword()) ){
             throw new BadRequestException("Password does not match");
         }
         User newUser = new User();

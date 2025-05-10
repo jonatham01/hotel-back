@@ -5,12 +5,14 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import manager.util.Role;
+import manager.util.RolePermissionMap;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Entity
 @Table(name="auth_users")
@@ -26,16 +28,20 @@ public class User implements UserDetails {
     private String username;
     private String name;
     private String password;
+    @Enumerated(EnumType.STRING)
     private Role role;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        List<SimpleGrantedAuthority> authority= role.getPermissions().stream()
-                .map(Enum::name)
-                .map(SimpleGrantedAuthority::new)
-                .toList();
-        authority.add(new SimpleGrantedAuthority("ROLE_" + this.role.name()));
-        return authority;
+        // Obtener los permisos del Role del usuario usando RolePermissionMap
+        List<SimpleGrantedAuthority> authorities = RolePermissionMap.getPermissions(this.role).stream()
+                .map(permission -> new SimpleGrantedAuthority(permission.name())) // Convertir RolePermission a Authorities
+                .collect(Collectors.toList());
+
+        // Agregar la autoridad del rol (ROLE_ADMIN, ROLE_CLIENT, etc.)
+        authorities.add(new SimpleGrantedAuthority("ROLE_" + this.role.name()));
+
+        return authorities;
     }
 
 

@@ -74,6 +74,7 @@ public class HttpSecurityConfig {
         authorizeRequests.requestMatchers(HttpMethod.GET,"/auth/profile")
                 .hasAnyRole(Role.ADMINISTRATOR.name(),Role.CLIENT.name());
         authorizeRequests.requestMatchers(HttpMethod.POST,"/auth/authenticate").permitAll();
+        authorizeRequests.requestMatchers(HttpMethod.POST,"/auth/save").permitAll();
         authorizeRequests.requestMatchers(HttpMethod.GET,"/auth/validate-token").permitAll();
         authorizeRequests.requestMatchers(HttpMethod.GET,"/auth/logout").permitAll();
 

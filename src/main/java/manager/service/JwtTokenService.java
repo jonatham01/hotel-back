@@ -28,18 +28,20 @@ public class JwtTokenService {
     }
 
     public String createToken(User user, Map<String, Object> claims) {
-        Date now = new Date(System.currentTimeMillis());
-        Date expiration = new Date(now.getTime() + 1000 * 60 * 60 * 24);
-        return Jwts.builder()
-                .header()
-                .type("jwt")
-                .and()
-                .subject(user.getUsername())
-                .issuedAt(now)
-                .expiration(expiration)
-                .claims(claims)
-                .signWith(getSecretKey())
-                .compact();
+
+            Date now = new Date(System.currentTimeMillis());
+            Date expiration = new Date(now.getTime() + 1000 * 60 * 60 * 24);
+            return Jwts.builder()
+                    .header()
+                    .type("jwt")
+                    .and()
+                    .subject(user.getUsername())
+                    .issuedAt(now)
+                    .expiration(expiration)
+                    .claims(claims)
+                    .signWith(getSecretKey())
+                    .compact();
+
     }
 
     public Claims parseToken(String token) {
@@ -56,6 +58,7 @@ public class JwtTokenService {
 
     public String extractJwtFromRequest(HttpServletRequest req) {
         String header=  req.getHeader("Authorization");
+        if(header == null){return null;}
         if(StringUtils.hasText(header)|| !header.startsWith("Bearer "))return null;
         return header.substring(7);
     }
