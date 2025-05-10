@@ -29,17 +29,17 @@ public class RoomController {
         return ResponseEntity.ok(roomService.getRoomById(id));
     }
     @PostMapping()
-    public ResponseEntity<RoomResponse> createRoom(RoomDto dto){
+    public ResponseEntity<RoomResponse> createRoom(@RequestBody RoomDto dto){
         Room room = roomService.createRoom(dto);
         return ResponseEntity.ok(roomMapper.toResponse(room));
     }
-    @PutMapping()
-    public ResponseEntity<RoomResponse> updateRoom(RoomDto dto, int id){
+    @PutMapping("update/{id}")
+    public ResponseEntity<RoomResponse> updateRoom(@RequestBody RoomDto dto,@PathVariable int id){
         Room room = roomService.updateRoom(dto, id);
         return ResponseEntity.ok(roomMapper.toResponse(room));
     }
-    @DeleteMapping()
-    public ResponseEntity<Boolean> deleteRoom(int id){
+    @DeleteMapping("delete/{id}")
+    public ResponseEntity<Boolean> deleteRoom(@PathVariable int id){
         return ResponseEntity.ok(roomService.deleteRoomById(id));
     }
 }
