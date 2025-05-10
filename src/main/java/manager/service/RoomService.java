@@ -10,24 +10,25 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-import static manager.mapper.RoomMapper.toEntity;
+import  manager.mapper.RoomMapper;
 
 @Service
 @RequiredArgsConstructor
 public class RoomService {
     private final RoomRepository roomRepository;
+    private final RoomMapper roomMapper;
 
     public List<RoomResponse> getAllRooms() {
         try {
             return roomRepository.findAll().stream()
-                    .map(RoomMapper::toResponse).toList();
+                    .map(roomMapper::toResponse).toList();
         }catch (Exception e) {
             throw new RuntimeException("System couldn't get all the rooms");
         }
     }
     public RoomResponse getRoomById(int id) {
         try{
-            return RoomMapper.toResponse(roomRepository.findById(id).get());
+            return roomMapper.toResponse(roomRepository.findById(id).get());
         }catch (Exception e) {
             throw new RuntimeException("System couldn't get room by id");
         }
@@ -35,7 +36,7 @@ public class RoomService {
 
     public Room createRoom(RoomDto room) {
         try {
-            return roomRepository.save(toEntity(room) );
+            return roomRepository.save(roomMapper.toEntity(room) );
         }
         catch (Exception e) {
             throw new RuntimeException("System couldn't create room");
@@ -43,7 +44,7 @@ public class RoomService {
     }
     public Room updateRoom(RoomDto dto, int id) {
         try {
-            Room room= toEntity(dto);
+            Room room= roomMapper.toEntity(dto);
             room.setRoomId(id);
             return roomRepository.save(room);
         }

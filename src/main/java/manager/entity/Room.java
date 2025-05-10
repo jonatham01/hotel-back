@@ -27,12 +27,6 @@ public class Room {
     @Column(name = "room_description")
     private String description;
 
-    @Column(name = "room_category_id")
-    private Integer roomCategoryId;
-
-    @Column(name = "room_category_hotel")
-    private Integer roomCategoryHotelId;
-
     @Column(name = "room_status") //enabled //desable
     private String roomStatus;
 
@@ -44,8 +38,8 @@ public class Room {
     @JoinColumn(name="room_category_id")
     private RoomCategory roomCategory;
 
-    @OneToMany(mappedBy = "room")
-    private List<RoomOccupancy> availabilityRooms;
+//    @OneToMany(mappedBy = "room")
+//    private List<RoomOccupancy> availabilityRooms;
 
     @Override
     public boolean equals(Object o) {

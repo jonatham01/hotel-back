@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import manager.dto.RoomDto;
 import manager.dto.RoomResponse;
 import manager.entity.Room;
+import manager.mapper.RoomMapper;
 import manager.service.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +18,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class RoomController {
     private final RoomService roomService;
+    private final RoomMapper roomMapper;
 
     @GetMapping()
     public ResponseEntity<List<RoomResponse>> getRoom() {
@@ -27,12 +29,14 @@ public class RoomController {
         return ResponseEntity.ok(roomService.getRoomById(id));
     }
     @PostMapping()
-    public ResponseEntity<Room> createRoom(RoomDto dto){
-      return ResponseEntity.ok(roomService.createRoom(dto));
+    public ResponseEntity<RoomResponse> createRoom(RoomDto dto){
+        Room room = roomService.createRoom(dto);
+        return ResponseEntity.ok(roomMapper.toResponse(room));
     }
     @PutMapping()
-    public ResponseEntity<Room> updateRoom(RoomDto dto, int id){
-        return ResponseEntity.ok(roomService.updateRoom(dto,id));
+    public ResponseEntity<RoomResponse> updateRoom(RoomDto dto, int id){
+        Room room = roomService.updateRoom(dto, id);
+        return ResponseEntity.ok(roomMapper.toResponse(room));
     }
     @DeleteMapping()
     public ResponseEntity<Boolean> deleteRoom(int id){
