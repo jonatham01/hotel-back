@@ -89,10 +89,8 @@ public class RoomCategoryService {
            RoomCategory updatedRoomCategory = repository.save(roomCategory);
            return RoomCategoryMapper.entityToDto(updatedRoomCategory);
        }catch (Exception e) {
-           RoomCategoryException.exception("Room category could not be updated. Try again");
+           throw new RuntimeException ("Room category could not be updated. Try again");
        }
-
-
     }
 
     public void deleteById(Integer id) {
