@@ -56,8 +56,8 @@ public class AuthService {
 
 
     public AuthenticationResponse login(AuthenticationRequest authenticationRequest) {
-        if(userService.findOneByUserName(authenticationRequest.getUsername()) != null) {
-            throw new UsernameNotFoundException("Username " + authenticationRequest.getUsername() + " already exists");
+        if(userService.findOneByUserName(authenticationRequest.getUsername()).isEmpty()) {
+            throw new UsernameNotFoundException("Username " + authenticationRequest.getUsername() + " does not exist");
         }
         Authentication authentication = new UsernamePasswordAuthenticationToken(authenticationRequest.getUsername(), authenticationRequest.getPassword());
         authenticationManager.authenticate(authentication);

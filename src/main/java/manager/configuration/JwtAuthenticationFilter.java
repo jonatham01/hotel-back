@@ -49,7 +49,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
         UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
-                username,
+                userDetails,
                 null,
                 userDetails.getAuthorities());
 

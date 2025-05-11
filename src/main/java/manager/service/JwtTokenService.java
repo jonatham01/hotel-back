@@ -57,7 +57,13 @@ public class JwtTokenService {
     }
 
     public String extractJwtFromRequest(HttpServletRequest req) {
-        String header=  req.getHeader("Authorization");
+        String header;
+        try {
+            header=  req.getHeader("Authorization");
+        }catch (Exception e){
+            throw new RuntimeException("no header");
+        }
+
         if(header == null){return null;}
         if(StringUtils.hasText(header)|| !header.startsWith("Bearer "))return null;
         return header.substring(7);

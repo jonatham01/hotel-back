@@ -71,8 +71,8 @@ public class HttpSecurityConfig {
         authorizeRequests.requestMatchers(HttpMethod.GET,"/room-categories/available").permitAll();
         authorizeRequests.requestMatchers(HttpMethod.GET,"/room-attribute").permitAll();
 
-        authorizeRequests.requestMatchers(HttpMethod.GET,"/auth/profile")
-                .hasAnyRole(Role.ADMINISTRATOR.name(),Role.CLIENT.name());
+        authorizeRequests.requestMatchers(HttpMethod.POST,"/auth/profile")
+                .permitAll();//hasAnyRole(Role.ADMINISTRATOR.name(),Role.CLIENT.name())
         authorizeRequests.requestMatchers(HttpMethod.POST,"/auth/authenticate").permitAll();
         authorizeRequests.requestMatchers(HttpMethod.POST,"/auth/save").permitAll();
         authorizeRequests.requestMatchers(HttpMethod.GET,"/auth/validate-token").permitAll();
