@@ -25,9 +25,6 @@ public class HotelException {
         if (request.getHotelName() == null || request.getHotelName().isEmpty()) {
             throw new ApiUnProcessableEntity("Name's hotel is required");
         }
-        if (request.getHotelId() == null) {
-            throw new ApiUnProcessableEntity("Id's hotel is required");
-        }
     }
 
     public static void notFound(Integer id) throws RuntimeException{

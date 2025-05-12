@@ -28,9 +28,10 @@ CREATE TABLE client (
 
 
 CREATE TABLE hotel_phone (
-                             number VARCHAR(20) PRIMARY KEY,
-                             phone_hotel_id INT NOT NULL,
-                             FOREIGN KEY (phone_hotel_id) REFERENCES hotel(hotel_id)
+                             id INT AUTO_INCREMENT PRIMARY KEY,  -- Columna `id` como clave primaria
+                             number VARCHAR(20) NOT NULL,        -- Columna `number` como regular
+                             phone_hotel_id INT NOT NULL,        -- ID del hotel (clave foránea)
+                             FOREIGN KEY (phone_hotel_id) REFERENCES hotel(hotel_id)  -- Clave foránea hacia la tabla `hotel`
 );
 
 CREATE TABLE room_categories (

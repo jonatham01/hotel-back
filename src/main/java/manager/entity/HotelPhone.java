@@ -6,12 +6,15 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "phones")
+@Table(name = "hotel_phone")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class HotelPhone {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private short id;
+
     private String number;
 
     @ManyToOne()

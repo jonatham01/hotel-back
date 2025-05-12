@@ -6,6 +6,9 @@ import manager.dto.HotelResponse;
 import manager.entity.Hotel;
 import org.springframework.stereotype.Component;
 
+import java.util.Collections;
+import java.util.stream.Collectors;
+
 public class HotelMapper {
 
     public static Hotel newHotelToHotel(HotelRequest hotelRequest) {
@@ -27,16 +30,19 @@ public class HotelMapper {
                 .state(hotel.getHotelState())
                 .country(hotel.getHotelCountry())
                 .hotelPhones(
-                        hotel.getHotelPhones().stream()
-                                .map(hotelPhone -> {
-                                    HotelPhoneResponse response = new HotelPhoneResponse();
-                                    response.setHotelNumber(hotelPhone.getNumber()); // suponiendo que setHotelNumber existe
-                                    return response;
-                                })
-                                .toList()
+                        hotel.getHotelPhones() != null ? // Verificación de null
+                                hotel.getHotelPhones().stream()
+                                        .map(hotelPhone -> {
+                                            HotelPhoneResponse response = new HotelPhoneResponse();
+                                            response.setHotelNumber(hotelPhone.getNumber()); // suponiendo que setHotelNumber existe
+                                            return response;
+                                        })
+                                        .collect(Collectors.toList()) // Usar collect en lugar de toList() para compatibilidad
+                                : Collections.emptyList() // Si la lista es null, devuelve una lista vacía
                 )
                 .build();
     }
+
 
 
 }

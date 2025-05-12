@@ -35,14 +35,14 @@ public class HotelPhoneController {
         HotelPhone number = hotelPhoneService.createHotelPhone(hotelPhone);
         return ResponseEntity.ok(HotelPhoneMapper.toHotelPhoneResponse(number));
     }
-    @PutMapping
-    public ResponseEntity<HotelPhoneResponse> updateHotelPhone(@RequestBody HotelPhone hotelPhone) {
-        HotelPhone number = hotelPhoneService.updateHotelPhone(hotelPhone);
+    @PutMapping(path = "/{oldNumber}")
+    public ResponseEntity<HotelPhoneResponse> updateHotelPhone(@RequestBody HotelPhone hotelPhone, @PathVariable String oldNumber) {
+        HotelPhone number = hotelPhoneService.updateHotelPhone(hotelPhone,oldNumber);
         return ResponseEntity.ok(HotelPhoneMapper.toHotelPhoneResponse(number));
 
     }
-    @DeleteMapping
-    public ResponseEntity<Boolean> deleteHotelPhone(@RequestParam String number) {
+    @DeleteMapping(path = "/{number}")
+    public ResponseEntity<Boolean> deleteHotelPhone(@PathVariable String number) {
         boolean response = hotelPhoneService.deleteHotelPhone(number);
         return ResponseEntity.ok().body(response);
     }

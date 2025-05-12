@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class HotelPhoneResponse {
+    private short id;
     private String hotelNumber;
     private String hotelName;
 

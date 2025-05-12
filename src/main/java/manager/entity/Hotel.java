@@ -5,12 +5,12 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "hotels")
+@Table(name = "hotel")
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
 public class Hotel {
     @Id
@@ -34,5 +34,8 @@ public class Hotel {
 
     @OneToMany(mappedBy = "hotel")
     private List<RoomCategory> roomCategories;
-
+    public Hotel() {
+        this.hotelPhones = new ArrayList<>();
+        this.roomCategories = new ArrayList<>();
+    }
 }
