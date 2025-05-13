@@ -24,11 +24,12 @@ public class RoomCategoryMapper {
         List<RoomAttributeResponseDTO> roomAttributeDto =  roomCategory.getRoomAttributes().stream()
                 .map(RoomAttributeMapper::toDTO).toList();
         return RoomCategoryResponse.builder()
+                .roomCategoryId(roomCategory.getRoomCategoryId())
                 .roomCategoryName(roomCategory.getRoomCategoryName())
                 .roomCategoryDescription(roomCategory.getRoomCategoryDescription())
                 .roomCategoryPrice(roomCategory.getRoomCategoryPrice())
 
-                .hotel(roomCategory.getHotel())
+                //.hotel(roomCategory.getHotel())
                 .roomAttributes(roomAttributeDto)
                 .roomCategoryGalleries(roomCategory.getRoomCategoryGalleries())
                 .build();

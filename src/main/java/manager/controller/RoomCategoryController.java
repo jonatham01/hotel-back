@@ -26,7 +26,11 @@ public class RoomCategoryController {
         return ResponseEntity.ok().body(roomCategoryService.findById(id));
     }
     @GetMapping("filter")
-    public ResponseEntity<List<RoomCategoryResponse>> findByFilter(@RequestParam String name, @RequestParam double min, @RequestParam double max, @RequestParam Integer hotelId ){
+    public ResponseEntity<List<RoomCategoryResponse>> findByFilter(
+            @RequestParam(required = false) String name,
+            @RequestParam(required = false) Double min,
+            @RequestParam(required = false) Double max,
+            @RequestParam Integer hotelId) {
         //modificar
             return ResponseEntity.ok().body(roomCategoryService.findByParameters(name, min, max, hotelId));
     }
@@ -39,7 +43,7 @@ public class RoomCategoryController {
         return ResponseEntity.ok().body(roomCategoryService.createRoomCategory(roomCategoryRequest));
     }
     @PutMapping("update/{id}")
-    public ResponseEntity<RoomCategoryResponse> update(@RequestBody RoomCategoryRequest roomCategory, Integer id) {
+    public ResponseEntity<RoomCategoryResponse> update(@RequestBody RoomCategoryRequest roomCategory,@PathVariable Integer id) {
         return ResponseEntity.ok().body(roomCategoryService.update(roomCategory,id));
     }
     @DeleteMapping("delete/{id}")

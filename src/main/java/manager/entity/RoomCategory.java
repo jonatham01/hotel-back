@@ -6,12 +6,12 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name = "room_categories")
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
 public class RoomCategory {
 
@@ -44,6 +44,12 @@ public class RoomCategory {
 
     @OneToMany(mappedBy = "roomCategory")
     private List<RoomCategoryGallery> roomCategoryGalleries;
+
+    public RoomCategory() {
+        this.rooms = new ArrayList<>();
+        this.roomAttributes = new ArrayList<>();
+        this.roomCategoryGalleries = new ArrayList<>();
+    }
 
 
 }

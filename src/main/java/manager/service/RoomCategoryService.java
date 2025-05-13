@@ -66,15 +66,26 @@ public class RoomCategoryService {
                         }
                 ).toList();
     }
-    public List<RoomCategoryResponse> findByParameters(String name, double min, double max, Integer hotelId){
+    public List<RoomCategoryResponse> findByParameters(String name, Double min, Double max, Integer hotelId){
         List<RoomCategory> roomCategory;
-        if(name==null && Double.isNaN(min) && Double.isNaN(max)){
+        boolean isNameNullOrEmpty = (name == null || name.trim().isEmpty());
+        boolean isMinNull = (min == null);
+        boolean isMaxNull = (max == null);
+
+        if(isNameNullOrEmpty && isMinNull && isMaxNull){
             roomCategory = repository.findByHotel_HotelId(hotelId);
         }else{
-            roomCategory = repository.findRoomCategories(min, max, hotelId, name);
+            // Si min o max son null, puedes asignarles valores por defecto aquí si es necesario.
+            double minValue = (min != null) ? min : 0.0;
+            double maxValue = (max != null) ? max : Double.MAX_VALUE;
+            String nameFilter = (name != null) ? name : "";
+
+            roomCategory = repository.findRoomCategories(minValue, maxValue, hotelId, nameFilter);
         }
         if(roomCategory.isEmpty())RoomCategoryException.exception("System could not find any Room category");
-        return roomCategory.stream().map(RoomCategoryMapper::entityToDto).toList();
+        return roomCategory.stream()
+                .map(RoomCategoryMapper::entityToDto)
+                .toList();
     }
     public RoomCategoryResponse update(RoomCategoryRequest dto, Integer id) {
         RoomCategory roomCategory = repository.findById(id).orElseThrow(()->new RuntimeException("System could not find room category"));
