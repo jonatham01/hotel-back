@@ -32,6 +32,7 @@ public class RoomCategoryController {
             @RequestParam(required = false) Double max,
             @RequestParam Integer hotelId) {
         //modificar
+
             return ResponseEntity.ok().body(roomCategoryService.findByParameters(name, min, max, hotelId));
     }
     @GetMapping("available/{date}")

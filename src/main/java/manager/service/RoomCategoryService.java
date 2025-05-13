@@ -57,6 +57,8 @@ public class RoomCategoryService {
         RoomCategoryException.exception("Room category could not be found. Try again");
         return null;
     }
+
+    //PENDIENTE DE TEST CUANDO HAGA DISPONIBILITY
     public List<RoomCategoryResponse> findByDisponibility(LocalDate date) {
         return findAll().stream()
                 .filter( roomCategoryResponse -> {
@@ -75,12 +77,10 @@ public class RoomCategoryService {
         if(isNameNullOrEmpty && isMinNull && isMaxNull){
             roomCategory = repository.findByHotel_HotelId(hotelId);
         }else{
-            // Si min o max son null, puedes asignarles valores por defecto aquí si es necesario.
-            double minValue = (min != null) ? min : 0.0;
-            double maxValue = (max != null) ? max : Double.MAX_VALUE;
-            String nameFilter = (name != null) ? name : "";
+            /// Si name es cadena vacía, se debe pasar como null para que funcione la condición SQL
+            String nameFilter = isNameNullOrEmpty ? null : name;
 
-            roomCategory = repository.findRoomCategories(minValue, maxValue, hotelId, nameFilter);
+            roomCategory = repository.findRoomCategories(min, max, hotelId, nameFilter);
         }
         if(roomCategory.isEmpty())RoomCategoryException.exception("System could not find any Room category");
         return roomCategory.stream()
