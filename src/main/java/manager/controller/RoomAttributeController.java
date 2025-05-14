@@ -25,6 +25,13 @@ public class RoomAttributeController {
     public ResponseEntity<List<RoomAttributeResponseDTO>> getRoomAttribute() {
         return ResponseEntity.ok().body(service.getAll());
     }
+
+    @GetMapping("/by-category")
+    public ResponseEntity<List<RoomAttributeResponseDTO>> getByRoomCategory(@RequestParam Integer roomCategoryId) {
+        List<RoomAttributeResponseDTO> response = service.getByRoomCategory(roomCategoryId);
+        return ResponseEntity.ok(response);
+    }
+
     @GetMapping("id")
     public ResponseEntity<RoomAttributeResponseDTO> getRoomAttributeById(@RequestParam int id) {
         return ResponseEntity.ok().body(service.getById(id));
@@ -34,7 +41,7 @@ public class RoomAttributeController {
     public ResponseEntity<?> createRoomAttribute(
             @RequestPart("data") RoomAttributeDto dto,
             @RequestPart("file") MultipartFile file
-    ) {
+    ) {     System.out.println(dto);
         try {
             RoomAttributeResponseDTO response = service.create(dto, file);
             return ResponseEntity.ok(response);

@@ -43,6 +43,14 @@ public class RoomAttributeService {
         }
     }
 
+    public List<RoomAttributeResponseDTO> getByRoomCategory(Integer roomCategoryId) {
+        List<RoomAttribute> attributes = roomAttributeRepository.findAllByRoomCategory_RoomCategoryId(roomCategoryId);
+        return attributes.stream()
+                .map(RoomAttributeMapper::toDTO)
+                .toList();
+    }
+
+
     public RoomAttributeResponseDTO getById(int id) {
         try {
             RoomAttribute attribute = roomAttributeRepository.findById(id).orElseThrow( () -> new RuntimeException());
@@ -52,11 +60,11 @@ public class RoomAttributeService {
         }
 
     }
+
     public RoomAttributeResponseDTO getByName(String name) {
         RoomAttribute attribute= roomAttributeRepository.findByRoomAttributeName(name).orElseThrow(() -> new RuntimeException("System could not find room attribute"));
         return RoomAttributeMapper.toDTO(attribute);
     }
-
 
     public RoomAttributeResponseDTO create(RoomAttributeDto dto, MultipartFile file) throws IOException {
         if (roomAttributeRepository.existsByRoomAttributeName(dto.getRoomAttributeName())) {
