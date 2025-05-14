@@ -39,14 +39,13 @@ public class RoomAttributeController {
 
     @PostMapping(value = "/create", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<?> createRoomAttribute(
-            @RequestPart("data") RoomAttributeDto dto,
-            @RequestPart("file") MultipartFile file
-    ) {     System.out.println(dto);
+            @RequestPart(name = "data", required = false) RoomAttributeDto dto,
+            @RequestPart(name = "file", required = false) MultipartFile file
+    ) {
+        System.out.println("dto");
         try {
             RoomAttributeResponseDTO response = service.create(dto, file);
             return ResponseEntity.ok(response);
-        } catch (IllegalArgumentException e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
         } catch (IOException e) {
             return ResponseEntity.status(500).body("Image upload failed");
         }

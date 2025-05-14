@@ -5,9 +5,11 @@ import lombok.Data;
 
 @Data
 @Builder
+
 public class RoomAttributeDto {
     private String roomAttributeName;
     private String roomAttributeDescription;
     private Integer roomCategoryId;
+
 }
 

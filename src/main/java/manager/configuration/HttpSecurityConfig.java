@@ -79,8 +79,12 @@ public class HttpSecurityConfig {
         authorizeRequests.requestMatchers(HttpMethod.POST,"/auth/save").permitAll();
         authorizeRequests.requestMatchers(HttpMethod.GET,"/auth/validate-token").permitAll();
         authorizeRequests.requestMatchers(HttpMethod.GET,"/auth/logout").permitAll();
+        authorizeRequests.requestMatchers(HttpMethod.GET, "/media/image/**").permitAll();
+        authorizeRequests.requestMatchers(HttpMethod.GET, "/uploads/**").permitAll();
 
         authorizeRequests.anyRequest().hasAnyRole(Role.ADMINISTRATOR.name());
+
+
     }
 
 }

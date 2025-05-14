@@ -27,8 +27,10 @@ public class MediaController {
     public ResponseEntity<Resource> getImage(@PathVariable String filename) {
         try {
             Path imagePath = Paths.get(uploadDir).resolve(filename).normalize();
+            //System.out.println(imagePath.toString());
+
             if (!Files.exists(imagePath)) {
-                return ResponseEntity.notFound().build();
+               return ResponseEntity.notFound().build();
             }
 
             Resource resource = new UrlResource(imagePath.toUri());
@@ -37,7 +39,7 @@ public class MediaController {
             if (contentType == null) {
                 contentType = "application/octet-stream";
             }
-
+            //System.out.println(resource);
             return ResponseEntity.ok()
                     .contentType(MediaType.parseMediaType(contentType))
                     .body(resource);
