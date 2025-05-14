@@ -22,5 +22,5 @@ public class RoomCategoryResponse {
     private String roomCategoryDescription;
     //private Hotel hotel;
     private List<RoomAttributeResponseDTO> roomAttributes;
-    private List<RoomCategoryGallery> roomCategoryGalleries;
+    private List<GalleryResponseDTO> roomCategoryGalleries;
 }

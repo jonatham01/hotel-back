@@ -23,6 +23,7 @@ public class RoomCategoryService {
     private final RoomCategoryRepository repository ;
     private final RoomCategoryDisponibilityRepository disponibilityRepository ;
     private final HotelRepository hotelRepository;
+    private final RoomCategoryMapper mapper ;
 
     public RoomCategoryResponse createRoomCategory(RoomCategoryRequest roomCategoryRequest) {
         RoomCategory roomCategory = RoomCategoryMapper.dtoToEntity(roomCategoryRequest);
@@ -33,7 +34,7 @@ public class RoomCategoryService {
         RoomCategoryException.validate(roomCategory);
         try {
             RoomCategory savedRoomCategory = repository.save(roomCategory);
-            return RoomCategoryMapper.entityToDto(savedRoomCategory);
+            return mapper.entityToDto(savedRoomCategory);
         }
         catch (Exception e) {
             RoomCategoryException.exception("Room category could not be saved. Try again");
@@ -43,7 +44,7 @@ public class RoomCategoryService {
     public List<RoomCategoryResponse> findAll() {
         try {
             return repository.findAll().stream()
-                    .map(RoomCategoryMapper::entityToDto)
+                    .map(mapper::entityToDto)
                     .toList();
         }
         catch (Exception e) {
@@ -53,7 +54,7 @@ public class RoomCategoryService {
 
     public RoomCategoryResponse findById(Integer id) {
         Optional<RoomCategory> roomCategory = repository.findById(id);
-        if (roomCategory.isPresent()) return RoomCategoryMapper.entityToDto(roomCategory.get());
+        if (roomCategory.isPresent()) return mapper.entityToDto(roomCategory.get());
         RoomCategoryException.exception("Room category could not be found. Try again");
         return null;
     }
@@ -68,6 +69,7 @@ public class RoomCategoryService {
                         }
                 ).toList();
     }
+
     public List<RoomCategoryResponse> findByParameters(String name, Double min, Double max, Integer hotelId){
         List<RoomCategory> roomCategory;
         boolean isNameNullOrEmpty = (name == null || name.trim().isEmpty());
@@ -84,7 +86,7 @@ public class RoomCategoryService {
         }
         if(roomCategory.isEmpty())RoomCategoryException.exception("System could not find any Room category");
         return roomCategory.stream()
-                .map(RoomCategoryMapper::entityToDto)
+                .map(mapper::entityToDto)
                 .toList();
     }
     public RoomCategoryResponse update(RoomCategoryRequest dto, Integer id) {
@@ -97,7 +99,7 @@ public class RoomCategoryService {
         }
        try {
            RoomCategory updatedRoomCategory = repository.save(roomCategory);
-           return RoomCategoryMapper.entityToDto(updatedRoomCategory);
+           return mapper.entityToDto(updatedRoomCategory);
        }catch (Exception e) {
            throw new RuntimeException ("Room category could not be updated. Try again");
        }
