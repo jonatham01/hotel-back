@@ -41,12 +41,12 @@ public class RoomCategoryGalleryController {
         }
     }
 
-    @GetMapping("{id}")
+    @GetMapping("{categoryId}")
     public List<GalleryResponseDTO> getAll(@PathVariable Integer categoryId) {
         return service.getAll(categoryId);
     }
 
-    @DeleteMapping("id/{id}")
+    @DeleteMapping("delete/{id}")
     public ResponseEntity<Boolean> delete(@PathVariable Long id) {
         service.delete(id);
         return ResponseEntity.ok(true);
