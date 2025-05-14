@@ -1,5 +1,6 @@
 package manager.controller;
 
+import manager.dto.GalleryResponseDTO;
 import manager.entity.RoomCategoryGallery;
 import manager.service.RoomCategoryGalleryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +32,7 @@ public class RoomCategoryGalleryController {
             @RequestPart MultipartFile image
     ) {
         try {
-            RoomCategoryGallery gallery = service.save(tittle, description, image, categoryId);
+            GalleryResponseDTO gallery = service.save(tittle, description, image, categoryId);
             return ResponseEntity.ok(gallery);
         } catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
@@ -40,14 +41,14 @@ public class RoomCategoryGalleryController {
         }
     }
 
-    @GetMapping
-    public List<RoomCategoryGallery> getAll() {
-        return service.getAll();
+    @GetMapping("{id}")
+    public List<GalleryResponseDTO> getAll(@PathVariable Integer categoryId) {
+        return service.getAll(categoryId);
     }
 
     @DeleteMapping("id/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Long id) {
+    public ResponseEntity<Boolean> delete(@PathVariable Long id) {
         service.delete(id);
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.ok(true);
     }
 }

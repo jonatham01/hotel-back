@@ -1,8 +1,10 @@
 package manager.service;
 
 import lombok.RequiredArgsConstructor;
+import manager.dto.GalleryResponseDTO;
 import manager.entity.RoomCategory;
 import manager.entity.RoomCategoryGallery;
+import manager.mapper.GalleryMapper;
 import manager.repository.RoomCategoryGalleryRepository;
 import manager.repository.RoomCategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +26,8 @@ import java.util.UUID;
 public class RoomCategoryGalleryService {
 
     private final RoomCategoryRepository roomCategoryRepository;
+    private final GalleryMapper galleryMapper;
+
     @Value("${gallery.upload.path:src/main/resources/static/uploads}")
     private String uploadDir;
 
@@ -32,7 +36,7 @@ public class RoomCategoryGalleryService {
 
 
 
-    public RoomCategoryGallery save(String tittle, String description, MultipartFile file, Integer categoryId) throws IOException {
+    public GalleryResponseDTO save(String tittle, String description, MultipartFile file, Integer categoryId) throws IOException {
         if (repository.existsByTittle(tittle)) {
             throw new IllegalArgumentException("Title already exists");
         }
@@ -53,15 +57,19 @@ public class RoomCategoryGalleryService {
         gallery.setRoomCategory(category);
         RoomCategory roomCategory = roomCategoryRepository.findById(categoryId).orElseThrow(() -> new IllegalArgumentException("Invalid room category ID"));
         gallery.setRoomCategory(roomCategory);
-
-        return repository.save(gallery);
+        RoomCategoryGallery roomCategoryGallery = repository.save(gallery);
+        return galleryMapper.toDto(roomCategoryGallery);
     }
 
-    public List<RoomCategoryGallery> getAll() {
-        return repository.findAll();
+    public List<GalleryResponseDTO> getAll(Integer id) {
+        return repository.findAllByRoomCategory_RoomCategoryId(id)
+                .stream()
+                .map(galleryMapper::toDto)
+                .toList();
     }
 
-    public void delete(Long id) {
+    public boolean delete(Long id) {
         repository.deleteById(id);
+        return true;
     }
 }
