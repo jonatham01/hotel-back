@@ -9,6 +9,7 @@ import java.time.LocalDate;
 @Data
 @Builder
 public class ClientRequestDTO {
+    private Long identifier;
     private String typeIdentifier;
     private String firstName;
     private String lastName;

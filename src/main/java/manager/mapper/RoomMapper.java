@@ -38,6 +38,7 @@ public class RoomMapper {
                 .roomCategoryHotelId(room.getHotel().getHotelId())
                 //.availabilities(room.getAvailabilityRooms())
                 .roomStatus(room.getRoomStatus())
+                .categoryName(room.getRoomCategory().getRoomCategoryName())
                 .build();
     }
 }

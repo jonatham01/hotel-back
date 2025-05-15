@@ -24,7 +24,8 @@ public class ClientService {
     public ClientResponseDTO createClient(ClientRequestDTO dto) {
         try {
             Client client = clientMapper.toEntity(dto);
-            return clientMapper.toDTO(clientRepository.save(client));
+            Client saved = clientRepository.save(client);
+            return clientMapper.toDTO(saved);
         }catch (EntityNotFoundException e) {
             throw new EntityNotFoundException("System could not create client");
         }

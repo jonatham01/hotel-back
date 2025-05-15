@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -16,7 +17,6 @@ import java.util.UUID;
 @Entity
 @Table(name = "payment")
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
 public class Payment{
 
@@ -37,14 +37,20 @@ public class Payment{
     @OneToMany(mappedBy = "reservationPayment")
     List<Reservation> paymentReservations;
 
+    @OneToMany(mappedBy = "payment")
+    List<PaymentTransaction> paymentTransactions;
+
+    public Payment(){
+        this.paymentTransactions = new ArrayList<>();
+        this.paymentReservations = new ArrayList<>();
+    }
+
 //    @OneToMany(mappedBy = "creditNotePayment")
 //    List<PaymentCreditNote> paymentCreditNotes;
 //
 //    @OneToMany(mappedBy = "billPayment")
 //    List<PaymentBill> paymentBills;
 
-    @OneToMany(mappedBy = "payment")
-    List<PaymentTransaction> paymentTransactions;
 
-    //List<RoomCategory> listRoomCategoriesPayment;
+
 }

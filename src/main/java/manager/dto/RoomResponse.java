@@ -12,5 +12,6 @@ public class RoomResponse {
     private Integer roomCategoryId;
     private Integer roomCategoryHotelId;
     private String roomStatus;
+    private String categoryName;
     //private List<RoomOccupancy> availabilities;
 }

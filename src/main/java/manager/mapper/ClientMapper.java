@@ -10,6 +10,7 @@ public class ClientMapper {
 
     public Client toEntity(ClientRequestDTO dto) {
         Client client = new Client();
+        client.setIdNumber(dto.getIdentifier());
         client.setTypeIdentifier(dto.getTypeIdentifier());
         client.setFirstName(dto.getFirstName());
         client.setLastName(dto.getLastName());
