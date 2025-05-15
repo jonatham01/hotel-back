@@ -15,6 +15,8 @@ public class ReservationRequestDTO {
     private BigDecimal reservationTotalValue;
     private Integer reservationHotelId;
     private Integer reservationRoomCategoryId;
-
     private Long reservationClientId;
+    //@ManyToOne
+    // @JoinColumn(name = "reservation_payment_id")
+    //private Payment payment;
 }

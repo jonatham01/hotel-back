@@ -59,9 +59,12 @@ public class RoomCategoryService {
         return null;
     }
 
-    //PENDIENTE DE TEST CUANDO HAGA DISPONIBILITY
+    //PENDIENTE DE TEST CUANDO HAGA DISPONIBILITYC
     public List<RoomCategoryResponse> findByDisponibility(LocalDate date) {
-        return findAll().stream()
+        List<RoomCategoryResponse> roomCategories =  repository.findAll().stream()
+                .map(mapper::entityToDto)
+                .toList();
+        return roomCategories.stream()
                 .filter( roomCategoryResponse -> {
                     Optional<RoomCategoryDisponibility> roomCategoryDisponibility = disponibilityRepository.findByCategoryIdAndDate(roomCategoryResponse.getRoomCategoryId(),date);
                         if(roomCategoryDisponibility.isEmpty()) return true;

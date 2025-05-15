@@ -67,7 +67,7 @@ public class ReservationService {
                     if (!disabledRoomIdList.contains(roomId))  disabledRoomIdList.add(roomId);
                 });
             }
-            //find rooms and remove reserved ones
+            //find rooms and remove reserved ones. At the end, list only contain available rooms
             List<Room> allRooms = roomRepository.findAllByRoomStatus("Enable");
            if(!disabledRoomIdList.isEmpty()) {
                allRooms.removeAll(disabledRoomIdList);

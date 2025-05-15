@@ -1,18 +1,21 @@
 package manager.controller;
 
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import manager.dto.RoomCategoryRequest;
 import manager.dto.RoomCategoryResponse;
 import manager.entity.RoomCategory;
 import manager.service.RoomCategoryService;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.List;
 
-@Controller
+@RestController
 @RequestMapping("room-categories")
 @RequiredArgsConstructor
 public class RoomCategoryController {
@@ -25,6 +28,19 @@ public class RoomCategoryController {
     public ResponseEntity<RoomCategoryResponse> findById(@PathVariable Integer id) {
         return ResponseEntity.ok().body(roomCategoryService.findById(id));
     }
+    @GetMapping("available/{year}/{month}/{day}")
+    public List<RoomCategoryResponse> availableRooms(@PathVariable String year, @PathVariable String month, @PathVariable String day, HttpServletRequest request) {
+        System.out.println(">> URI Recibida: " + request.getRequestURI());
+        System.out.println(">> Path: /room-categories/available/" + year + "/" + month + "/" + day);
+
+        try {
+            LocalDate localDate = LocalDate.parse(year + "-" + month + "-" + day);
+            return roomCategoryService.findByDisponibility(localDate);
+        }catch (DateTimeParseException e) {
+            throw new RuntimeException("Invalid date format");
+        }
+    }
+
     @GetMapping("filter")
     public ResponseEntity<List<RoomCategoryResponse>> findByFilter(
             @RequestParam(required = false) String name,
@@ -35,10 +51,7 @@ public class RoomCategoryController {
 
             return ResponseEntity.ok().body(roomCategoryService.findByParameters(name, min, max, hotelId));
     }
-    @GetMapping("available/{date}")
-    public List<RoomCategoryResponse> findAvailableRooms(@PathVariable LocalDate date) {
-        return roomCategoryService.findByDisponibility(date);
-    }
+
     @PostMapping()
     public ResponseEntity<RoomCategoryResponse> create(@RequestBody RoomCategoryRequest roomCategoryRequest) {
         return ResponseEntity.ok().body(roomCategoryService.createRoomCategory(roomCategoryRequest));

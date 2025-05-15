@@ -20,7 +20,11 @@ public class GlobalExceptionHandler {
         ApiError error = new ApiError();
         error.setBackendMessage(e.getMessage());
         error.setMessage("Internal server error, please try again");
-        error.setPath(request.getRequestURI());
+        String originalUri = (String) request.getAttribute("javax.servlet.forward.request_uri");
+        if (originalUri == null) {
+            originalUri = request.getRequestURI();
+        }
+        error.setPath(originalUri);
         error.setMethod(request.getMethod());
         error.setTimestamp(LocalDateTime.now());
         return ResponseEntity.status(500).body(error);

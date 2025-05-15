@@ -7,13 +7,13 @@ import lombok.NoArgsConstructor;
 
 import java.math.BigInteger;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
-
+//DEFINE LA OCUPACION DE UNA CATEGORIA PARA UNA FECHA ESPECIFICA
 @Entity
 @Table(name = "room_category_disponibility")
 @Data
 @AllArgsConstructor
-@NoArgsConstructor
 public class RoomCategoryDisponibility {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,5 +36,9 @@ public class RoomCategoryDisponibility {
 
     @OneToMany(mappedBy = "disponibility") //permite ver las habitaciones ocupadas
     private List<RoomCategoryDisponibilityRoom> dontAvailableRooms;
+
+    public RoomCategoryDisponibility(){
+        this.dontAvailableRooms = new ArrayList<>();
+    }
 
 }

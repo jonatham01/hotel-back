@@ -41,10 +41,11 @@ public class HttpSecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable) //csrfConfigurer -> csrfConfigurer.disable()
                 .sessionManagement( config -> config.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider)
-                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
                 .authorizeHttpRequests(authorizeRequests -> {
                     buildRequestMatches2(authorizeRequests);
                 })
+                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
+
                 .exceptionHandling(exceptions -> {
                     exceptions.authenticationEntryPoint(authenticationEntryPoint);
                     exceptions.accessDeniedHandler(accessDeniedHandler);
@@ -66,9 +67,9 @@ public class HttpSecurityConfig {
 
     private static void buildRequestMatches2(AuthorizeHttpRequestsConfigurer<HttpSecurity>.AuthorizationManagerRequestMatcherRegistry authorizeRequests) {
 
-        authorizeRequests.requestMatchers(HttpMethod.GET,"/room-categories").permitAll();
-        authorizeRequests.requestMatchers(HttpMethod.GET,"/room-categories/filter").permitAll();
-        authorizeRequests.requestMatchers(HttpMethod.GET,"/room-categories/available").permitAll();
+        authorizeRequests.requestMatchers(HttpMethod.GET ,"/room-categories/**").permitAll();
+        //authorizeRequests.requestMatchers(HttpMethod.GET,"/room-categories/filter").permitAll();
+        //authorizeRequests.requestMatchers(HttpMethod.GET,"/room-categories/available/**").permitAll();
         authorizeRequests.requestMatchers(HttpMethod.GET,"/room-attribute").permitAll();
 
         authorizeRequests.requestMatchers(HttpMethod.POST,"/auth/profile")
