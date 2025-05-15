@@ -9,11 +9,13 @@ import manager.repository.*;
 import org.springframework.stereotype.Service;
 import jakarta.persistence.EntityNotFoundException;
 import java.math.BigInteger;
+import java.nio.ByteBuffer;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
@@ -30,6 +32,13 @@ public class ReservationService {
     private final HotelRepository hotelRepository;
     private final ClientRepository clientRepository;
 
+    // método para convertir UUID a byte[16]
+    public static byte[] asBytes(UUID uuid) {
+        ByteBuffer bb = ByteBuffer.wrap(new byte[16]);
+        bb.putLong(uuid.getMostSignificantBits());
+        bb.putLong(uuid.getLeastSignificantBits());
+        return bb.array();
+    }
     public static List<LocalDate> getDatesBetween(LocalDate start, LocalDate end) {
         List<LocalDate> dates = new ArrayList<>();
         LocalDate current = start;
@@ -43,14 +52,17 @@ public class ReservationService {
     }
 
 
-    public ReservationResponseDTO createReservation(ReservationRequestDTO dto) {
+    public List<ReservationResponseDTO> createReservation(ReservationRequestDTO dto) {
+        List<Reservation> reservations = new ArrayList<>();
         List<LocalDate> dates = getDatesBetween(
           dto.getReservationStartDate(),dto.getReservationEndDate()
         );
         List<Integer> disabledRoomIdList  = new ArrayList<>();
         List<RoomCategoryDisponibilityRoom> dontAvailableRooms = new ArrayList<>();
+        //añadimos las dontAvailableRooms a la lista
+        //genero bucle para agregar todas las Room category disponibilities en una lista
+
         try {
-            //genero bucle para agregar todas las Room category disponibilities en una lista
             dates.stream().forEach( localDate -> {
                 Optional<RoomCategoryDisponibility> disponibility = reservationCategoryDisponibilityRepository.findByCategoryIdAndDate(
                         dto.getReservationRoomCategoryId(),
@@ -60,6 +72,12 @@ public class ReservationService {
                     dontAvailableRooms.addAll(disponibility.get().getDontAvailableRooms());
                 }
             });
+        }catch (Exception e) {
+            throw new EntityNotFoundException(e.getMessage());
+        }
+
+
+        try {
             //añadir todos los ids de los rooms, sino estan en la lista
             if(!dontAvailableRooms.isEmpty()) {
                 dontAvailableRooms.forEach( roomCategoryDisponibilityRoom -> {
@@ -68,7 +86,8 @@ public class ReservationService {
                 });
             }
             //find rooms and remove reserved ones. At the end, list only contain available rooms
-            List<Room> allRooms = roomRepository.findAllByRoomStatus("Enable");
+            List<Room> allRooms = roomRepository.findByRoomStatusAndRoomCategoryRoomCategoryId("Disponible",dto.getReservationRoomCategoryId());
+
            if(!disabledRoomIdList.isEmpty()) {
                allRooms.removeAll(disabledRoomIdList);
            }
@@ -80,17 +99,23 @@ public class ReservationService {
                         localDate
                 );
                 RoomCategoryDisponibility roomCategoryDisponibility;
-                if(reservationCategoryDisponibility.isPresent()) {
+
+                if(!reservationCategoryDisponibility.isPresent()) {
                     roomCategoryDisponibility = new RoomCategoryDisponibility();
                     roomCategoryDisponibility.setCategoryId(dto.getReservationRoomCategoryId());
                     roomCategoryDisponibility.setCategoryName(name);
                     roomCategoryDisponibility.setDate(localDate);
+                    roomCategoryDisponibility.setOccupancy(1);
+                    roomCategoryDisponibility.setDisponibilityLevel(allRooms.size()-1);
                 }else{
                     roomCategoryDisponibility = reservationCategoryDisponibility.get();
+                    roomCategoryDisponibility.setOccupancy(reservationCategoryDisponibility.get().getOccupancy()+1);
+                    roomCategoryDisponibility.setDisponibilityLevel(
+                            allRooms.size()-reservationCategoryDisponibility.get().getOccupancy()
+                            //reservationCategoryDisponibility.get().getDisponibilityLevel()-1
+                    );
                 }
                 roomCategoryDisponibility.setQuantity(allRooms.size());
-                roomCategoryDisponibility.setOccupancy(reservationCategoryDisponibility.get().getOccupancy()+1);
-                roomCategoryDisponibility.setDisponibilityLevel(reservationCategoryDisponibility.get().getDisponibilityLevel()-1);
                 RoomCategoryDisponibility savedDisponibility = reservationCategoryDisponibilityRepository.save(roomCategoryDisponibility);
 
                 //create RoomCategoryDisponibilityRoom
@@ -98,32 +123,41 @@ public class ReservationService {
                         allRooms.getFirst().getRoomId(),
                         savedDisponibility.getId()
                 );
-                allRooms.remove(allRooms.getFirst());
+
+                Room room= allRooms.getFirst();
                 RoomCategoryDisponibilityRoom roomCategoryDisponibilityRoom =new RoomCategoryDisponibilityRoom();
                 roomCategoryDisponibilityRoom.setId(pk);
-                RoomCategoryDisponibilityRoom roomCategoryDisponibilityRoomResponse = roomCategoryDisponibilityRoomRepository.save(roomCategoryDisponibilityRoom);
-            });
+                roomCategoryDisponibilityRoom.setRoom(room);
+                roomCategoryDisponibilityRoom.setDisponibility(savedDisponibility);
 
-            //reservation creation
-            Hotel hotel = hotelRepository.findById(dto.getReservationHotelId()).orElseThrow(()->new RuntimeException("Hotel not found"));
-            Client client = clientRepository.findById(dto.getReservationClientId()).orElseThrow(()->new RuntimeException("Client not found"));
-            Reservation reservation = reservationMapper.toEntity(dto);
+                RoomCategoryDisponibilityRoom roomCategoryDisponibilityRoomResponse = roomCategoryDisponibilityRoomRepository.save(roomCategoryDisponibilityRoom);
+                //allRooms.remove(allRooms.getFirst());
+            });
+            //FIN DEL BUCLE
+
+            //CREATE Reservation
+            Hotel hotel = hotelRepository.findById(dto.getReservationHotelId()).orElse(null);
+            Client client = clientRepository.findById(dto.getReservationClientId()).orElse(null);
+            Optional<Payment> optionalPayment = paymentRepository.findById(dto.getPaymentId());
+
+            Reservation reservation = new Reservation();
             reservation.setReservationRoom(allRooms.getFirst());
             reservation.setReservationHotel(hotel);
             reservation.setReservationClient(client);
-            reservation.setReservationPayment(null);
+            reservation.setReservationPayment(optionalPayment.get());
+            reservation.setReservationStartDate(dto.getReservationStartDate());
+            reservation.setReservationEndDate(dto.getReservationEndDate());
+            reservation.setReservationTotalValue(dto.getReservationTotalValue());
+            reservation.setReservationCheckinStatus("Pendiente");
+            reservation.setReservationCheckoutStatus("Pendiente");
+            reservation.setReservationPaymentStatus("Realizado");
+
             Reservation savedReservation = reservationRepository.save(reservation);
-            //payment creation
-            Payment payment = new Payment();
-            payment.setPaymentClientId(dto.getReservationClientId());
-            payment.setPaymentTotalAmount(dto.getReservationTotalValue());
-            payment.setPaymentDate(LocalDateTime.now());
-            Payment savedPayment = paymentRepository.save(payment);
-            //update paymentId
-            reservation.setReservationPayment(savedPayment);
-            Reservation updatedReservation= reservationRepository.save(reservation);
-            //return
-            return reservationMapper.toDTO(updatedReservation);
+            reservations.add(savedReservation);
+
+            return reservations.stream()
+                    .map(reservationMapper::toDTO)
+                    .toList();
 
         }catch (Exception e){
             throw new EntityNotFoundException("Error while creating reservation");

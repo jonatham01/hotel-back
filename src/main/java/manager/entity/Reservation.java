@@ -45,11 +45,11 @@ public class Reservation {
 //
 //    @Column(name = "reservation_total_guest_cost")
 //    private BigDecimal reservationTotalGuestCost;
-
-
     @ManyToOne
-    @JoinColumn(name = "reservation_paymentId",nullable = true)
+    @JoinColumn(name = "reservation_payment_id")
     private Payment reservationPayment;
+
+
 
     @ManyToOne
     @JoinColumn(name = "reservation_hotel_id")

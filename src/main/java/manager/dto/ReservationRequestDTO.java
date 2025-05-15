@@ -6,6 +6,7 @@ import lombok.Data;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.time.LocalDate;
+import java.util.UUID;
 
 @Data
 @Builder
@@ -16,7 +17,5 @@ public class ReservationRequestDTO {
     private Integer reservationHotelId;
     private Integer reservationRoomCategoryId;
     private Long reservationClientId;
-    //@ManyToOne
-    // @JoinColumn(name = "reservation_payment_id")
-    //private Payment payment;
+    private UUID paymentId;
 }

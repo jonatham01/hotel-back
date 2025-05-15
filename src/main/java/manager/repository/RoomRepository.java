@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface RoomRepository  extends JpaRepository<Room, Integer> {
     List<Room> findAllByRoomStatus(String status);
+    List<Room> findByRoomStatusAndRoomCategoryRoomCategoryId(String roomStatus, Integer roomCategoryId);
+
 }

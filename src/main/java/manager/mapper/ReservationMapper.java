@@ -12,9 +12,9 @@ public class ReservationMapper {
         reservation.setReservationStartDate(dto.getReservationStartDate());
         reservation.setReservationEndDate(dto.getReservationEndDate());
         reservation.setReservationTotalValue(dto.getReservationTotalValue());
-        reservation.setReservationCheckinStatus("Reserved");
-        reservation.setReservationCheckoutStatus("Pendent");
-        reservation.setReservationPaymentStatus("Pendant");
+        reservation.setReservationCheckinStatus("Reservado");
+        reservation.setReservationCheckoutStatus("Pendiente");
+        reservation.setReservationPaymentStatus("Pendiente");
         //reservation.setReservationHotelId(dto.getReservationHotelId());
         //reservation.setReservationClientId(dto.getReservationClientId());
 

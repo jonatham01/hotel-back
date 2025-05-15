@@ -1,6 +1,8 @@
 create database hotel_reservation_db;
 
 use hotel_reservation_db;
+ALTER TABLE reservation
+    MODIFY COLUMN reservation_payment_id BINARY(16);
 CREATE TABLE hotel (
                        hotel_id INT PRIMARY KEY AUTO_INCREMENT,
                        hotel_name VARCHAR(100),
@@ -101,20 +103,20 @@ CREATE TABLE reservation (
                              reservation_id BIGINT PRIMARY KEY AUTO_INCREMENT,
                              reservation_start_date DATE,
                              reservation_end_date DATE,
-                             reservation_total_value DECIMAL(12,2),
-                             reservation_checkin_status VARCHAR(50),
-                             reservation_checkout_status VARCHAR(50),
-                             reservation_payment_status VARCHAR(50),
+                             reservation_total_value DECIMAL(38,2),
+                             reservation_checkin_status VARCHAR(255),
+                             reservation_checkout_status VARCHAR(255),
+                             reservation_payment_status VARCHAR(255),
                              reservation_hotel_id INT,
                              reservation_room_id INT,
-                             reservation_payment_id UUID,
+                             reservation_payment_id BINARY(16),
                              reservation_client_id BIGINT,
+
                              FOREIGN KEY (reservation_hotel_id) REFERENCES hotel(hotel_id),
                              FOREIGN KEY (reservation_room_id) REFERENCES room(room_id),
                              FOREIGN KEY (reservation_payment_id) REFERENCES payment(payment_id),
                              FOREIGN KEY (reservation_client_id) REFERENCES client(id_number)
 );
-
 
 
 
