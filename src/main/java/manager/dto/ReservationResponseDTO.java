@@ -19,6 +19,8 @@ public class ReservationResponseDTO {
     private String reservationCheckoutStatus;
     private Integer reservationHotelId;
     private Integer reservationRoomId;
+    private String reservationRoomName;
     private UUID reservationPaymentId;
     private Long reservationClientId;
+    private String reservationClientName;
 }

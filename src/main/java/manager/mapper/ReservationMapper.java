@@ -32,8 +32,10 @@ public class ReservationMapper {
                 .reservationCheckoutStatus(reservation.getReservationCheckoutStatus())
                 .reservationHotelId(reservation.getReservationHotel().getHotelId())
                 .reservationRoomId(reservation.getReservationRoom().getRoomId())
+                .reservationRoomName((reservation.getReservationRoom().getName()))
                 .reservationPaymentId(reservation.getReservationPayment().getId())
                 .reservationClientId(reservation.getReservationClient().getIdNumber())
+                .reservationClientName(reservation.getReservationClient().getFirstName() + " " + reservation.getReservationClient().getLastName())
                 .build();
     }
 }
