@@ -23,6 +23,7 @@ public class JwtTokenService {
     private final JwtTokenRepository tokenRepository;
 
     public SecretKey getSecretKey() {
+        //Decores & Keys
         byte[] bytes = Decoders.BASE64.decode("2k4n2k42k4b24jb213l1n3knk1n31kn3k13k131k3b13kb");
         return Keys.hmacShaKeyFor(bytes);
     }

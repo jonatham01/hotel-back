@@ -40,6 +40,7 @@ public class User implements UserDetails {
 
         // Agregar la autoridad del rol (ROLE_ADMIN, ROLE_CLIENT, etc.)
         authorities.add(new SimpleGrantedAuthority("ROLE_" + this.role.name()));
+        //authorities.add(new SimpleGrantedAuthority(this.role.name()));
 
         return authorities;
     }

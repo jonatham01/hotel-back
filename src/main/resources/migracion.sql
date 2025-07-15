@@ -1,23 +1,4 @@
--- MySQL dump 10.13  Distrib 8.0.36, for Win64 (x86_64)
---
--- Host: localhost    Database: hotel_reservation_db
--- ------------------------------------------------------
--- Server version	5.5.5-10.4.32-MariaDB
 
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!50503 SET NAMES utf8 */;
-/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
-/*!40103 SET TIME_ZONE='+00:00' */;
-/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-
---
--- Table structure for table `auth_users`
---
 
 DROP TABLE IF EXISTS `auth_users`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
@@ -77,37 +58,7 @@ INSERT INTO `client` VALUES (123456789,'Preferencial','1995-06-15','CC','Juan','
 /*!40000 ALTER TABLE `client` ENABLE KEYS */;
 UNLOCK TABLES;
 
---
--- Table structure for table `fee`
---
 
-DROP TABLE IF EXISTS `fee`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `fee` (
-  `fee_id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `fee_public_value` double DEFAULT NULL,
-  `fee_date` date DEFAULT NULL,
-  `fee_increment_rate` smallint(6) DEFAULT NULL,
-  `fee_category_id` int(11) DEFAULT NULL,
-  PRIMARY KEY (`fee_id`),
-  KEY `fee_category_id` (`fee_category_id`),
-  CONSTRAINT `fee_ibfk_1` FOREIGN KEY (`fee_category_id`) REFERENCES `room_categories` (`room_category_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `fee`
---
-
-LOCK TABLES `fee` WRITE;
-/*!40000 ALTER TABLE `fee` DISABLE KEYS */;
-/*!40000 ALTER TABLE `fee` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `hotel`
---
 
 DROP TABLE IF EXISTS `hotel`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
@@ -189,6 +140,32 @@ INSERT INTO `hotels` VALUES (1,'123 Ocean Drive','Miami','USA','Hotel Paradise',
 /*!40000 ALTER TABLE `hotels` ENABLE KEYS */;
 UNLOCK TABLES;
 
+
+DROP TABLE IF EXISTS `room_categories`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `room_categories` (
+                                   `room_category_id` int(11) NOT NULL AUTO_INCREMENT,
+                                   `room_category_name` varchar(255) DEFAULT NULL,
+                                   `room_category_night_price` double DEFAULT NULL,
+                                   `room_category_description` varchar(255) DEFAULT NULL,
+                                   `room_category_hotel_id` int(11) NOT NULL,
+                                   PRIMARY KEY (`room_category_id`),
+                                   KEY `FKs9y4avhax3x4mymceundctigy` (`room_category_hotel_id`),
+                                   CONSTRAINT `FKs9y4avhax3x4mymceundctigy` FOREIGN KEY (`room_category_hotel_id`) REFERENCES `hotels` (`hotel_id`),
+                                   CONSTRAINT `room_categories_ibfk_1` FOREIGN KEY (`room_category_hotel_id`) REFERENCES `hotel` (`hotel_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `room_categories`
+--
+
+LOCK TABLES `room_categories` WRITE;
+/*!40000 ALTER TABLE `room_categories` DISABLE KEYS */;
+INSERT INTO `room_categories` VALUES (1,'Habitaci√≥n de Lujo',450000,'Espaciosa habitaci√≥n con vista al mar, cama king size, jacuzzi, minibar y servicio a la habitaci√≥n 24 horas.',1),(3,'Suite Ejecutiva',750000,'Habitaci√≥n lujosa con escritorio y jacuzzi',1),(4,'Habitaci√≥n Est√°ndar',120000,'C√≥moda habitaci√≥n con ba√±o privado y TV',1);
+/*!40000 ALTER TABLE `room_categories` ENABLE KEYS */;
+UNLOCK TABLES;
 --
 -- Table structure for table `jwt_token`
 --
@@ -316,7 +293,7 @@ CREATE TABLE `payment` (
 
 LOCK TABLES `payment` WRITE;
 /*!40000 ALTER TABLE `payment` DISABLE KEYS */;
-INSERT INTO `payment` VALUES (_binary 'éó\ﬁ>aL\rå\“¸≥ç9\’',150.75,'2025-05-15 19:30:00',123456789);
+INSERT INTO `payment` VALUES (_binary 'ÔøΩÔøΩ\ÔøΩ>aL\rÔøΩ\ÔøΩÔøΩÔøΩÔøΩ9\ÔøΩ',150.75,'2025-05-15 19:30:00',123456789);
 /*!40000 ALTER TABLE `payment` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -582,7 +559,7 @@ CREATE TABLE `reservation` (
 
 LOCK TABLES `reservation` WRITE;
 /*!40000 ALTER TABLE `reservation` DISABLE KEYS */;
-INSERT INTO `reservation` VALUES (1,'2025-06-01','2025-06-05',500.00,'Pendiente','Pendiente','Realizado',1,1,_binary 'éó\ﬁ>aL\rå\“¸≥ç9\’',123456789);
+INSERT INTO `reservation` VALUES (1,'2025-06-01','2025-06-05',500.00,'Pendiente','Pendiente','Realizado',1,1,_binary 'ÔøΩÔøΩ\ÔøΩ>aL\rÔøΩ\ÔøΩÔøΩÔøΩÔøΩ9\ÔøΩ',123456789);
 /*!40000 ALTER TABLE `reservation` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -680,31 +657,7 @@ UNLOCK TABLES;
 -- Table structure for table `room_categories`
 --
 
-DROP TABLE IF EXISTS `room_categories`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `room_categories` (
-  `room_category_id` int(11) NOT NULL AUTO_INCREMENT,
-  `room_category_name` varchar(255) DEFAULT NULL,
-  `room_category_night_price` double DEFAULT NULL,
-  `room_category_description` varchar(255) DEFAULT NULL,
-  `room_category_hotel_id` int(11) NOT NULL,
-  PRIMARY KEY (`room_category_id`),
-  KEY `FKs9y4avhax3x4mymceundctigy` (`room_category_hotel_id`),
-  CONSTRAINT `FKs9y4avhax3x4mymceundctigy` FOREIGN KEY (`room_category_hotel_id`) REFERENCES `hotels` (`hotel_id`),
-  CONSTRAINT `room_categories_ibfk_1` FOREIGN KEY (`room_category_hotel_id`) REFERENCES `hotel` (`hotel_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Dumping data for table `room_categories`
---
-
-LOCK TABLES `room_categories` WRITE;
-/*!40000 ALTER TABLE `room_categories` DISABLE KEYS */;
-INSERT INTO `room_categories` VALUES (1,'Habitaci√≥n de Lujo',450000,'Espaciosa habitaci√≥n con vista al mar, cama king size, jacuzzi, minibar y servicio a la habitaci√≥n 24 horas.',1),(3,'Suite Ejecutiva',750000,'Habitaci√≥n lujosa con escritorio y jacuzzi',1),(4,'Habitaci√≥n Est√°ndar',120000,'C√≥moda habitaci√≥n con ba√±o privado y TV',1);
-/*!40000 ALTER TABLE `room_categories` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `room_category_disponibility`
@@ -818,14 +771,29 @@ LOCK TABLES `room_occupancy` WRITE;
 /*!40000 ALTER TABLE `room_occupancy` DISABLE KEYS */;
 /*!40000 ALTER TABLE `room_occupancy` ENABLE KEYS */;
 UNLOCK TABLES;
-/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-05-16  9:51:27
+
+DROP TABLE IF EXISTS `fee`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `fee` (
+                       `fee_id` bigint(20) NOT NULL AUTO_INCREMENT,
+                       `fee_public_value` double DEFAULT NULL,
+                       `fee_date` date DEFAULT NULL,
+                       `fee_increment_rate` smallint(6) DEFAULT NULL,
+                       `fee_category_id` int(11) DEFAULT NULL,
+                       PRIMARY KEY (`fee_id`),
+                       KEY `fee_category_id` (`fee_category_id`),
+                       CONSTRAINT `fee_ibfk_1` FOREIGN KEY (`fee_category_id`) REFERENCES `room_categories` (`room_category_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `fee`
+--
+
+LOCK TABLES `fee` WRITE;
+/*!40000 ALTER TABLE `fee` DISABLE KEYS */;
+/*!40000 ALTER TABLE `fee` ENABLE KEYS */;
+UNLOCK TABLES;

@@ -10,10 +10,12 @@ public class RolePermissionMap {
                     RolePermission.READ_ALL,
                     RolePermission.READ_ONE,
                     RolePermission.UPDATE_ONE,
-                    RolePermission.DISABLE_ONE
+                    RolePermission.DISABLE_ONE,
+                    RolePermission.GENERATE_REPORT
             ),
             Role.CLIENT, List.of(
                     RolePermission.READ_MY_PROFILE,
+
                     RolePermission.READ_MY_PURCHASES
             )
     );

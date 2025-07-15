@@ -9,6 +9,7 @@ public enum RolePermission {
     DISABLE_ONE,
 
     READ_MY_PURCHASES,
-    READ_MY_PROFILE;
+    READ_MY_PROFILE,
+    GENERATE_REPORT
 
 }

@@ -43,6 +43,7 @@ public class HotelPhoneController {
     }
     @DeleteMapping(path = "/{number}")
     public ResponseEntity<Boolean> deleteHotelPhone(@PathVariable String number) {
+        System.out.println("probando");
         boolean response = hotelPhoneService.deleteHotelPhone(number);
         return ResponseEntity.ok().body(response);
     }
